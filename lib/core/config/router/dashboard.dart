@@ -15,6 +15,7 @@ class DashboardPage extends StatelessWidget {
       routes: const [
         MainRoute(),
         LocationRoute(),
+        // LocationInfoRoute(),
         EpisodeRoute(),
         SettingsRoute()
       ],
@@ -31,20 +32,17 @@ class DashboardPage extends StatelessWidget {
         //
         //alterntivly you could use a global key
         return Scaffold(
-            backgroundColor: AppColors.darkTheme,
             body: child,
             bottomNavigationBar: BottomNavigationBar(
-              backgroundColor: AppColors.darkTheme,
-              selectedLabelStyle:
-                  AppFonts.s12w400,
-                  selectedItemColor: AppColors.green,
-                  showUnselectedLabels: true,
-                  unselectedItemColor: AppColors.grey,
-              unselectedLabelStyle:
-                  AppFonts.s12w400,
+              type: BottomNavigationBarType.fixed, // IMPORTANT PART
+
+              selectedLabelStyle: AppFonts.s12w400,
+              selectedItemColor: AppColors.green,
+              showUnselectedLabels: true,
+              unselectedItemColor: AppColors.grey,
+              unselectedLabelStyle: AppFonts.s12w400,
               currentIndex: tabsRouter.activeIndex,
               onTap: (index) {
-                // here we switch between tabs
                 tabsRouter.setActiveIndex(index);
               },
               items: [

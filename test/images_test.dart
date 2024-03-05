@@ -7,6 +7,8 @@ void main() {
   test('images assets test', () {
     expect(File(Images.character).existsSync(), isTrue);
     expect(File(Images.divider).existsSync(), isTrue);
+    expect(File(Images.earth).existsSync(), isTrue);
+    expect(File(Images.earth1).existsSync(), isTrue);
     expect(File(Images.episode).existsSync(), isTrue);
     expect(File(Images.grid).existsSync(), isTrue);
     expect(File(Images.group).existsSync(), isTrue);
@@ -14,6 +16,9 @@ void main() {
     expect(File(Images.imgBig).existsSync(), isTrue);
     expect(File(Images.list).existsSync(), isTrue);
     expect(File(Images.location).existsSync(), isTrue);
+    expect(File(Images.morty).existsSync(), isTrue);
+    expect(File(Images.palette).existsSync(), isTrue);
+    expect(File(Images.rick).existsSync(), isTrue);
     expect(File(Images.settings).existsSync(), isTrue);
     expect(File(Images.settingsIcon).existsSync(), isTrue);
     expect(File(Images.splash).existsSync(), isTrue);

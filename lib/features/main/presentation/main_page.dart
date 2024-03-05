@@ -7,7 +7,6 @@ import 'package:rick_and_morty/features/widgets/custom_text_field.dart';
 import 'package:rick_and_morty/features/widgets/grid_list_item.dart';
 import 'package:rick_and_morty/features/widgets/list_item.dart';
 
-
 @RoutePage()
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
@@ -20,7 +19,6 @@ class _MainPageState extends State<MainPage> {
   final TextEditingController controller = TextEditingController();
   @override
   void dispose() {
-    
     super.dispose();
     controller.dispose();
   }
@@ -39,14 +37,11 @@ class _MainPageState extends State<MainPage> {
                 CustomTextField(
                   controller: controller,
                 ),
-                const SizedBox(
-                  height: 24,
-                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Всего персонажей: 200",
+                      "ВСЕГО ПЕРСОНАЖЕЙ: 200",
                       style: AppFonts.s10w500.copyWith(color: AppColors.grey),
                     ),
                     IconButton(
@@ -84,20 +79,20 @@ class _MainPageState extends State<MainPage> {
                   ),
                 ),
                 Visibility(
-                  visible: isSelected,
-                  child: Expanded(
-                          child: GridView.builder(
-                              physics: const AlwaysScrollableScrollPhysics(),
-                              itemCount: 10,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 16,
-                                      mainAxisSpacing: 24),
-                              itemBuilder: (context, index) {
-                                return const ListItem();
-                              }),
-                ))
+                    visible: isSelected,
+                    child: Expanded(
+                      child: GridView.builder(
+                          physics: const AlwaysScrollableScrollPhysics(),
+                          itemCount: 10,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 16,
+                                  mainAxisSpacing: 24),
+                          itemBuilder: (context, index) {
+                            return const ListItem();
+                          }),
+                    ))
               ],
             ),
           ),

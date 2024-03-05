@@ -5,18 +5,21 @@ import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
 class AppRouter extends $AppRouter {
   @override
   List<AutoRoute> get routes => [
-        AutoRoute(page: SplashRoute.page,),
-        AutoRoute(page: DashboardRoute.page,  initial: true, children: [
-          AutoRoute(page: MainRoute.page, initial: true),
-          AutoRoute(
-            page: LocationRoute.page,
-          ),
-          AutoRoute(
-            page: EpisodeRoute.page,
-          ),
-          AutoRoute(
-            page: SettingsRoute.page,
-          ),
-        ])
+        // AutoRoute(
+        //   page: SplashRoute.page,
+        //   initial: true
+        // ),
+        AutoRoute(page: DashboardRoute.page, initial: true, children: [
+          AutoRoute(page: MainRoute.page),
+          AutoRoute(page: LocationRoute.page),
+          AutoRoute(page: EpisodeRoute.page),
+          AutoRoute(page: SettingsRoute.page, initial: true),
+        ]),
+        AutoRoute(page: LocationInfoRoute.page),
+        AutoRoute(page: PersonalInfoRoute.page,),
+        AutoRoute(
+          page: EditInfoRoute.page,
+          
+        ),
       ];
 }

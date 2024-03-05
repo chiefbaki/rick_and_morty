@@ -11,8 +11,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: false,
-        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
           backgroundColor: AppColors.darkTheme
+        ),
+        bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          backgroundColor: AppColors.textFieldColor
         ),
         scaffoldBackgroundColor: AppColors.darkTheme
       ),
