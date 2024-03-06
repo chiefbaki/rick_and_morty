@@ -43,6 +43,8 @@ dependencies:
   auto_route_generator: ^7.3.2
   flutter_svg: ^2.0.10+1
   image_picker: ^1.0.7
+  dio: ^5.4.1
+  flutter_bloc: ^8.1.4
   
 
 dev_dependencies:

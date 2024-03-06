@@ -9,6 +9,7 @@ abstract class AppColors {
   static const Color lightTheme = Colors.white;
   static const Color textFieldColor = Color(0XFF152A3A);
   static const Color grey = Color(0XFF5B6975);
+  static const Color lightGrey = Color(0XFFF2F2F2);
   static const Color green = Color(0XFF43D049);
   static Color blue = const Color(0XFF22A2BD).withOpacity(0.87);
   static const Color red = Color(0XFFEB5757);

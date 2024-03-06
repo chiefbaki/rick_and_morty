@@ -45,6 +45,7 @@ class EditInfoPage extends StatelessWidget {
             ),
             PersonalInfoField(
               controller: firstNameController,
+              hintText: "Имя",
             ),
             const SizedBox(
               height: 10,
@@ -58,6 +59,7 @@ class EditInfoPage extends StatelessWidget {
             ),
             PersonalInfoField(
               controller: lastNameController,
+              hintText: "Фамилия",
             ),
             const SizedBox(
               height: 10,
@@ -71,10 +73,12 @@ class EditInfoPage extends StatelessWidget {
             ),
             PersonalInfoField(
               controller: middleNameController,
+              hintText: "Отчество",
             ),
             const Spacer(),
-            SaveBtn(
+            CustomElevatedBtn(
               onPressed: () {},
+              label: "Сохранить",
             ),
           ],
         ),

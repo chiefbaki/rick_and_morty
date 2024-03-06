@@ -18,10 +18,12 @@ void main() {
     expect(File(Images.location).existsSync(), isTrue);
     expect(File(Images.morty).existsSync(), isTrue);
     expect(File(Images.palette).existsSync(), isTrue);
+    expect(File(Images.pass).existsSync(), isTrue);
     expect(File(Images.rick).existsSync(), isTrue);
     expect(File(Images.settings).existsSync(), isTrue);
     expect(File(Images.settingsIcon).existsSync(), isTrue);
     expect(File(Images.splash).existsSync(), isTrue);
     expect(File(Images.splashText).existsSync(), isTrue);
+    expect(File(Images.user).existsSync(), isTrue);
   });
 }

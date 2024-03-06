@@ -2,24 +2,31 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/core/config/theme/app_colors.dart';
 import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
 
-class PersonalInfoField extends StatelessWidget {
+
+class AuthTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hintText;
-  const PersonalInfoField(
-      {super.key, required this.controller, required this.hintText});
+  final String icon;
+  final bool obscureText;
+  const AuthTextField(
+      {super.key,
+      required this.controller,
+      required this.icon,
+      this.obscureText = false,
+      required this.hintText});
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: controller,
-      style: AppFonts.s16w400.copyWith(color: AppColors.white),
+      obscureText: obscureText,
+      style: AppFonts.s14w400.copyWith(color: AppColors.white),
       decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: AppFonts.s16w400.copyWith(color: AppColors.grey),
-          contentPadding:
-              const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+          prefixIcon: Image.asset(icon),
           filled: true,
           fillColor: AppColors.textFieldColor,
+          hintText: hintText,
+          hintStyle: AppFonts.s14w400.copyWith(color: AppColors.grey),
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
               borderSide: const BorderSide(color: AppColors.textFieldColor)),

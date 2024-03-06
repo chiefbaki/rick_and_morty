@@ -10,10 +10,10 @@ class AppRouter extends $AppRouter {
         //   initial: true
         // ),
         AutoRoute(page: DashboardRoute.page, initial: true, children: [
-          AutoRoute(page: MainRoute.page),
+          AutoRoute(page: MainRoute.page, initial: true),
           AutoRoute(page: LocationRoute.page),
           AutoRoute(page: EpisodeRoute.page),
-          AutoRoute(page: SettingsRoute.page, initial: true),
+          AutoRoute(page: SettingsRoute.page,),
         ]),
         AutoRoute(page: LocationInfoRoute.page),
         AutoRoute(page: PersonalInfoRoute.page,),
@@ -21,5 +21,8 @@ class AppRouter extends $AppRouter {
           page: EditInfoRoute.page,
           
         ),
+        // AutoRoute(page: SignInRoute.page,initial: true),
+        // AutoRoute(page: SignUpRoute.page, ),
+        
       ];
 }

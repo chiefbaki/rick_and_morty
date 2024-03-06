@@ -16,9 +16,11 @@ class Images {
   static const String location = 'assets/images/location.svg';
   static const String morty = 'assets/images/morty.png';
   static const String palette = 'assets/images/palette.png';
+  static const String pass = 'assets/images/pass.png';
   static const String rick = 'assets/images/rick.png';
   static const String settings = 'assets/images/settings.svg';
   static const String settingsIcon = 'assets/images/settings_icon.png';
   static const String splash = 'assets/images/splash.png';
   static const String splashText = 'assets/images/splash_text.png';
+  static const String user = 'assets/images/user.png';
 }

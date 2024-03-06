@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/core/config/theme/app_colors.dart';
 import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
 
-class SaveBtn extends StatelessWidget {
+class CustomElevatedBtn extends StatelessWidget {
   final Function() onPressed;
-  const SaveBtn({
+  final String label;
+  const CustomElevatedBtn({
     super.key,
-    required this.onPressed
+    required this.onPressed,
+    required this.label
   });
 
   @override
@@ -22,7 +24,7 @@ class SaveBtn extends StatelessWidget {
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12))),
           child: Text(
-            "Сохранить",
+            label,
             style: AppFonts.s16w400.copyWith(color: AppColors.white),
           )),
     );

@@ -16,10 +16,15 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  int _isSelected = 0;
+  final List<String> options = [
+    "Выключено",
+    "Включено",
+    "Следовать настройкам системы",
+    "В режиме энергоснабжения"
+  ];
+  String currentOption = "not selected";
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -102,8 +107,17 @@ class _SettingsPageState extends State<SettingsPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            
-                            contentPadding: const EdgeInsets.all(20.0),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text(
+                                    "Отмена",
+                                    style: AppFonts.s14w500
+                                        .copyWith(color: AppColors.white),
+                                  ))
+                            ],
                             backgroundColor: AppColors.darkTheme,
                             title: Padding(
                               padding: const EdgeInsets.all(20.0),
@@ -113,24 +127,50 @@ class _SettingsPageState extends State<SettingsPage> {
                                     .copyWith(color: AppColors.white),
                               ),
                             ),
-                            content: Padding(
-                              padding: const EdgeInsets.all(20.0),
+                            content: SizedBox(
+                              height: 200,
                               child: Column(
                                 children: [
-                                  Material(
-                                    child: RadioListTile(
-                                      
-                                      title: const Text("Выключено", style: AppFonts.s16w400,),
-                                        value: 0,
-                                        groupValue: true,
-                                        
-                                        onChanged: (val) {
-                                          
-                                          setState(() {
-                                            
-                                          });
-                                        }),
-                                  )
+                                  RadioListTile(
+                                      hoverColor: AppColors.white,
+                                      title: Text(
+                                        "Выключено",
+                                        style: AppFonts.s16w400
+                                            .copyWith(color: AppColors.white),
+                                      ),
+                                      value: options[0],
+                                      groupValue: currentOption,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          currentOption = val!;
+                                        });
+                                      }),
+                                  RadioListTile(
+                                      title: Text(
+                                        "Включено",
+                                        style: AppFonts.s16w400
+                                            .copyWith(color: AppColors.white),
+                                      ),
+                                      value: options[1],
+                                      groupValue: currentOption,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          currentOption = val!;
+                                        });
+                                      }),
+                                  RadioListTile(
+                                      title: Text(
+                                        "Следовать настройкам системы",
+                                        style: AppFonts.s16w400
+                                            .copyWith(color: AppColors.white),
+                                      ),
+                                      value: options[1],
+                                      groupValue: currentOption,
+                                      onChanged: (val) {
+                                        setState(() {
+                                          currentOption = val!;
+                                        });
+                                      }),
                                 ],
                               ),
                             ),
