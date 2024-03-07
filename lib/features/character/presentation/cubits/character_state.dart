@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/features/main/data/character_model.dart';
+import 'package:rick_and_morty/features/character/data/character_model.dart';
 
 @immutable
 sealed class CharacterState {}

@@ -18,6 +18,8 @@ class Images {
   static const String palette = 'assets/images/palette.png';
   static const String pass = 'assets/images/pass.png';
   static const String rick = 'assets/images/rick.png';
+  static const String rickava = 'assets/images/rickava.png';
+  static const String rickbg = 'assets/images/rickbg.png';
   static const String settings = 'assets/images/settings.svg';
   static const String settingsIcon = 'assets/images/settings_icon.png';
   static const String splash = 'assets/images/splash.png';

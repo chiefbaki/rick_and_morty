@@ -20,6 +20,8 @@ void main() {
     expect(File(Images.palette).existsSync(), isTrue);
     expect(File(Images.pass).existsSync(), isTrue);
     expect(File(Images.rick).existsSync(), isTrue);
+    expect(File(Images.rickava).existsSync(), isTrue);
+    expect(File(Images.rickbg).existsSync(), isTrue);
     expect(File(Images.settings).existsSync(), isTrue);
     expect(File(Images.settingsIcon).existsSync(), isTrue);
     expect(File(Images.splash).existsSync(), isTrue);

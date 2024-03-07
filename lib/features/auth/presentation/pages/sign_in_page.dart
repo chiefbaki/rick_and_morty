@@ -4,7 +4,6 @@ import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
 import 'package:rick_and_morty/core/config/theme/app_colors.dart';
 import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
-import 'package:rick_and_morty/features/auth/presentation/pages/sign_up_page.dart';
 import 'package:rick_and_morty/features/widgets/auth_text_field.dart';
 import 'package:rick_and_morty/features/widgets/create_btn.dart';
 import 'package:rick_and_morty/features/widgets/save_btn.dart';

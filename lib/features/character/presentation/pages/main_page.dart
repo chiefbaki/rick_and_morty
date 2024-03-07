@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/theme/app_colors.dart';
 import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
-import 'package:rick_and_morty/features/main/presentation/cubits/character_cubit.dart';
-import 'package:rick_and_morty/features/main/presentation/cubits/character_state.dart';
+import 'package:rick_and_morty/features/character/presentation/cubits/character_cubit.dart';
+import 'package:rick_and_morty/features/character/presentation/cubits/character_state.dart';
+import 'package:rick_and_morty/features/location/presentation/provider/location_provider.dart';
 import 'package:rick_and_morty/features/widgets/custom_text_field.dart';
 import 'package:rick_and_morty/features/widgets/grid_list_item.dart';
 import 'package:rick_and_morty/features/widgets/list_item.dart';
@@ -31,6 +33,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<CharacterCubit>(context).getDataCharacter();
+    final vm = Provider.of<LocationProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -43,6 +46,8 @@ class _MainPageState extends State<MainPage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is CharacterSuccess) {
+                vm.setModel(state.model);
+                debugPrint(state.model.info?.count.toString());
                 return Column(
                   children: [
                     CustomTextField(
@@ -95,7 +100,7 @@ class _MainPageState extends State<MainPage> {
                                 height: 24,
                               );
                             },
-                            itemCount: 10),
+                            itemCount: state.model.results?.length ?? 0),
                       ),
                     ),
                     Visibility(
@@ -103,13 +108,12 @@ class _MainPageState extends State<MainPage> {
                         child: Expanded(
                           child: GridView.builder(
                               physics: const AlwaysScrollableScrollPhysics(),
-                              itemCount: 10,
+                              itemCount: state.model.results?.length,
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 16,
-                                mainAxisSpacing: 24
-                              ),
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 16,
+                                      mainAxisSpacing: 24),
                               itemBuilder: (context, index) {
                                 return ListItem(
                                   img: state.model.results?[index].image ?? "",

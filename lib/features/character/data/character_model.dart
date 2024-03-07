@@ -30,23 +30,25 @@ class Info {
   int? count;
   int? pages;
   String? next;
-  Null? prev;
 
-  Info({this.count, this.pages, this.next, this.prev});
+  Info({
+    this.count,
+    this.pages,
+    this.next,
+  });
 
   Info.fromJson(Map<String, dynamic> json) {
     count = json['count'];
     pages = json['pages'];
     next = json['next'];
-    prev = json['prev'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['count'] = this.count;
-    data['pages'] = this.pages;
-    data['next'] = this.next;
-    data['prev'] = this.prev;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['count'] = count;
+    data['pages'] = pages;
+    data['next'] = next;
+
     return data;
   }
 }
@@ -86,10 +88,9 @@ class Results {
     species = json['species'];
     type = json['type'];
     gender = json['gender'];
-    origin =
-        json['origin'] != null ? new Origin.fromJson(json['origin']) : null;
+    origin = json['origin'] != null ? Origin.fromJson(json['origin']) : null;
     location =
-        json['location'] != null ? new Origin.fromJson(json['location']) : null;
+        json['location'] != null ? Origin.fromJson(json['location']) : null;
     image = json['image'];
     episode = json['episode'].cast<String>();
     url = json['url'];
@@ -97,8 +98,8 @@ class Results {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
     data['name'] = this.name;
     data['status'] = this.status;
     data['species'] = this.species;

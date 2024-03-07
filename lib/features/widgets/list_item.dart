@@ -29,7 +29,7 @@ class ListItem extends StatelessWidget {
         ),
         Text(
           status,
-          style: AppFonts.s10w500.copyWith(color: AppColors.green),
+          style: AppFonts.s10w500.copyWith(color: status == "Alive" ? AppColors.green : AppColors.red),
         ),
         Text(
           name,
