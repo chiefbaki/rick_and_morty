@@ -5,9 +5,11 @@ import 'package:rick_and_morty/core/utils/resources/resources.dart';
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
+  final String hintText;
   const CustomTextField({
     super.key,
-    required this.controller
+    required this.controller,
+    required this.hintText
   });
 
   @override
@@ -24,7 +26,7 @@ class CustomTextField extends StatelessWidget {
             size: 24,
             color: AppColors.grey,
           ),
-          hintText: "Найти персонажа",
+          hintText: hintText,
           hintStyle:
               AppFonts.s16w400.copyWith(color: AppColors.grey),
           contentPadding: const EdgeInsets.symmetric(

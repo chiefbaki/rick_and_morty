@@ -33,7 +33,7 @@ class LocationPage extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomTextField(controller: controller),
+                    CustomTextField(controller: controller, hintText: "Найти локацию",),
                     const SizedBox(
                       height: 24,
                     ),
@@ -48,6 +48,7 @@ class LocationPage extends StatelessWidget {
                       child: ListView.separated(
                           itemBuilder: (context, index) {
                             return LocationCards(
+                              type: state.model.results?[index].type ?? "",
                               text: state.model.results?[index].dimension ?? "",
                               title: state.model.results?[index].name ?? "",
                             );

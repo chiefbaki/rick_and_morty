@@ -15,16 +15,16 @@ import 'package:rick_and_morty/features/auth/presentation/pages/sign_in_page.dar
     as _i10;
 import 'package:rick_and_morty/features/auth/presentation/pages/sign_up_page.dart'
     as _i11;
-import 'package:rick_and_morty/features/character/presentation/pages/character_info_page.dart'
-    as _i1;
-import 'package:rick_and_morty/features/character/presentation/pages/main_page.dart'
-    as _i7;
 import 'package:rick_and_morty/features/episode/presentation/episode_page.dart'
     as _i4;
 import 'package:rick_and_morty/features/location/presentation/pages/location_info_page.dart'
     as _i5;
 import 'package:rick_and_morty/features/location/presentation/pages/location_page.dart'
     as _i6;
+import 'package:rick_and_morty/features/main/presentation/pages/character_info_page.dart'
+    as _i1;
+import 'package:rick_and_morty/features/main/presentation/pages/main_page.dart'
+    as _i7;
 import 'package:rick_and_morty/features/settings/presentation/pages/edit_info_page.dart'
     as _i3;
 import 'package:rick_and_morty/features/settings/presentation/pages/personal_info_page.dart'
@@ -115,7 +115,7 @@ abstract class $AppRouter extends _i13.RootStackRouter {
 /// generated route for
 /// [_i1.CharacterInfoPage]
 class CharacterInfoRoute extends _i13.PageRouteInfo<void> {
-  const CharacterInfoRoute({List<_i13.PageRouteInfo>? children})
+  const CharacterInfoRoute(String name, {List<_i13.PageRouteInfo>? children})
       : super(
           CharacterInfoRoute.name,
           initialChildren: children,

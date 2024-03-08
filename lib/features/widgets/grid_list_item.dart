@@ -1,8 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
 import 'package:rick_and_morty/core/config/theme/app_colors.dart';
 import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
+import 'package:rick_and_morty/core/utils/extensions/colors.dart';
+import 'package:rick_and_morty/features/location/presentation/provider/location_provider.dart';
+import 'package:rick_and_morty/features/main/presentation/pages/character_info_page.dart';
 import 'package:rick_and_morty/features/widgets/arrow_back_btn.dart';
 
 class GridItem extends StatelessWidget {
@@ -17,10 +21,17 @@ class GridItem extends StatelessWidget {
       required this.name,
       required this.img,
       required this.species,
-    this.gender = ""});
+      required this.gender});
 
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<LocationProvider>(context);
+    vm.getModel(
+        genderM: gender,
+        nameM: name,
+        speciesM: species,
+        imgM: img,
+        statusM: status);
     return ListTile(
       leading: Image.network(
         img,
@@ -44,18 +55,18 @@ class GridItem extends StatelessWidget {
         ],
       ),
       trailing: ArrowBackBtn(onPressed: () {
-        context.router.push(const CharacterInfoRoute());
+        debugPrint(200.toString());
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => CharacterInfoPage(
+                      name: name,
+                      gender: gender,
+                      species: species,
+                      status: status,
+                      img: img,
+                    )));
       }),
     );
-  }
-
-  Color setColor({required String text}) {
-    if (text == "Alive") {
-      return AppColors.green;
-    } else if (text == "Dead") {
-      return AppColors.red;
-    } else {
-      return AppColors.grey;
-    }
   }
 }

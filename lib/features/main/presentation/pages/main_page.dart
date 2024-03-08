@@ -5,9 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/theme/app_colors.dart';
 import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
-import 'package:rick_and_morty/features/character/presentation/cubits/character_cubit.dart';
-import 'package:rick_and_morty/features/character/presentation/cubits/character_state.dart';
 import 'package:rick_and_morty/features/location/presentation/provider/location_provider.dart';
+import 'package:rick_and_morty/features/main/data/character_model.dart';
+import 'package:rick_and_morty/features/main/presentation/cubits/character_cubit.dart';
+import 'package:rick_and_morty/features/main/presentation/cubits/character_state.dart';
 import 'package:rick_and_morty/features/widgets/custom_text_field.dart';
 import 'package:rick_and_morty/features/widgets/grid_list_item.dart';
 import 'package:rick_and_morty/features/widgets/list_item.dart';
@@ -33,7 +34,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<CharacterCubit>(context).getDataCharacter();
-    final vm = Provider.of<LocationProvider>(context);
+    
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -46,12 +47,12 @@ class _MainPageState extends State<MainPage> {
                   child: CircularProgressIndicator(),
                 );
               } else if (state is CharacterSuccess) {
-                vm.setModel(state.model);
                 debugPrint(state.model.info?.count.toString());
                 return Column(
                   children: [
                     CustomTextField(
                       controller: controller,
+                      hintText: "Найти персонажа",
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

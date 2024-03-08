@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:rick_and_morty/core/utils/constants/api_consts.dart';
-import 'package:rick_and_morty/features/character/data/character_model.dart';
+import 'package:rick_and_morty/features/main/data/character_model.dart';
+
 
 class CharacterUseCase {
   final Dio dio;

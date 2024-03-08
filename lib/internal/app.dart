@@ -4,13 +4,16 @@ import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/router/app_router.dart';
 import 'package:rick_and_morty/core/config/settings/dio_settings.dart';
 import 'package:rick_and_morty/core/config/theme/app_colors.dart';
+import 'package:rick_and_morty/features/episode/domain/episode_impl.dart';
+import 'package:rick_and_morty/features/episode/domain/episode_usecase.dart';
+import 'package:rick_and_morty/features/episode/presentation/cubit/episode_cubit.dart';
 import 'package:rick_and_morty/features/location/domain/location_impl.dart';
 import 'package:rick_and_morty/features/location/domain/location_usecase.dart';
 import 'package:rick_and_morty/features/location/presentation/cubit/location_cubit_cubit.dart';
-import 'package:rick_and_morty/features/character/domain/character_impl.dart';
-import 'package:rick_and_morty/features/character/domain/character_usecase.dart';
-import 'package:rick_and_morty/features/character/presentation/cubits/character_cubit.dart';
 import 'package:rick_and_morty/features/location/presentation/provider/location_provider.dart';
+import 'package:rick_and_morty/features/main/domain/character_impl.dart';
+import 'package:rick_and_morty/features/main/domain/character_usecase.dart';
+import 'package:rick_and_morty/features/main/presentation/cubits/character_cubit.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -22,6 +25,13 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
           create: (context) => DioSettings(),
         ),
+
+        RepositoryProvider(
+            create: (context) => EpisodeUseCase(
+                dio: RepositoryProvider.of<DioSettings>(context).dio)),
+        RepositoryProvider(
+            create: (context) => EpisodeImpl(
+                useCase: RepositoryProvider.of<EpisodeUseCase>(context))),
         RepositoryProvider(
             create: (context) => LocationUseCase(
                 dio: RepositoryProvider.of<DioSettings>(context).dio)),
@@ -39,6 +49,10 @@ class MyApp extends StatelessWidget {
       ],
       child: MultiBlocProvider(
         providers: [
+          BlocProvider(
+            create: (context) => EpisodeCubit(
+                repository: RepositoryProvider.of<EpisodeImpl>(context)),
+          ),
           BlocProvider(
             create: (context) => CharacterCubit(
                 repository: RepositoryProvider.of<CharacterImpl>(context)),

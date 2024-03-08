@@ -1,6 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/core/config/theme/app_colors.dart';
+import 'package:rick_and_morty/features/episode/presentation/cubit/episode_cubit.dart';
 import 'package:rick_and_morty/features/widgets/custom_text_field.dart';
 import 'package:rick_and_morty/features/widgets/episode_item.dart';
 
@@ -11,6 +13,7 @@ class EpisodePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();
+    BlocProvider.of<EpisodeCubit>(context).getEpisodes();
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -18,17 +21,17 @@ class EpisodePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Column(
               children: [
-                CustomTextField(controller: controller),
+                CustomTextField(controller: controller, hintText: "Найти эпизод",),
                 const SizedBox(
                   height: 8,
                 ),
-                const Flexible(
+                Flexible(
                   child: DefaultTabController(
                       length: 5,
                       initialIndex: 0,
                       child: Column(
                         children: [
-                            TabBar(
+                          const TabBar(
                               labelPadding: EdgeInsets.symmetric(horizontal: 5),
                               indicatorColor: AppColors.white,
                               indicatorWeight: 3.0,
@@ -51,15 +54,126 @@ class EpisodePage extends StatelessWidget {
                                   text: "СЕЗОН 5",
                                 ),
                               ]),
-                          Expanded(
-                            child: TabBarView(children: [
-                              EpisodeItem(),
-                              EpisodeItem(),
-                              EpisodeItem(),
-                              EpisodeItem(),
-                              EpisodeItem(),
-                            ]),
-                          )
+                          const SizedBox(
+                            height: 26,
+                          ),
+                          BlocBuilder<EpisodeCubit, EpisodeState>(
+                              builder: (context, state) {
+                            if (state is EpisodeLoading) {
+                              return const Center(
+                                child: CircularProgressIndicator(),
+                              );
+                            } else if (state is EpisodeSuccess) {
+                              return Expanded(
+                                child: TabBarView(children: [
+                                  ListView.separated(
+                                      separatorBuilder: (context, index) {
+                                        return const SizedBox(
+                                          height: 24,
+                                        );
+                                      },
+                                      itemBuilder: (context, index) {
+                                        return EpisodeItem(
+                                          series: state.model.results?[index]
+                                                  .episode ??
+                                              "",
+                                          name: state
+                                                  .model.results?[index].name ??
+                                              "",
+                                          date: state.model.results?[index]
+                                                  .airDate ??
+                                              "",
+                                        );
+                                      },
+                                      itemCount:
+                                          state.model.results?.length ?? 0),
+                                  ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(
+                                            height: 24,
+                                          ),
+                                      itemBuilder: (context, index) {
+                                        return EpisodeItem(
+                                          series: state.model.results?[index]
+                                                  .episode ??
+                                              "",
+                                          name: state
+                                                  .model.results?[index].name ??
+                                              "",
+                                          date: state.model.results?[index]
+                                                  .airDate ??
+                                              "",
+                                        );
+                                      },
+                                      itemCount:
+                                          state.model.results?.length ?? 0),
+                                  ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(
+                                            height: 24,
+                                          ),
+                                      itemBuilder: (context, index) {
+                                        return EpisodeItem(
+                                          series: state.model.results?[index]
+                                                  .episode ??
+                                              "",
+                                          name: state
+                                                  .model.results?[index].name ??
+                                              "",
+                                          date: state.model.results?[index]
+                                                  .airDate ??
+                                              "",
+                                        );
+                                      },
+                                      itemCount:
+                                          state.model.results?.length ?? 0),
+                                  ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(
+                                            height: 24,
+                                          ),
+                                      itemBuilder: (context, index) {
+                                        return EpisodeItem(
+                                          series: state.model.results?[index]
+                                                  .episode ??
+                                              "",
+                                          name: state
+                                                  .model.results?[index].name ??
+                                              "",
+                                          date: state.model.results?[index]
+                                                  .airDate ??
+                                              "",
+                                        );
+                                      },
+                                      itemCount:
+                                          state.model.results?.length ?? 0),
+                                  ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(
+                                            height: 24,
+                                          ),
+                                      itemBuilder: (context, index) {
+                                        return EpisodeItem(
+                                          series: state.model.results?[index]
+                                                  .episode ??
+                                              "",
+                                          name: state
+                                                  .model.results?[index].name ??
+                                              "",
+                                          date: state.model.results?[index]
+                                                  .airDate ??
+                                              "",
+                                        );
+                                      },
+                                      itemCount:
+                                          state.model.results?.length ?? 0),
+                                ]),
+                              );
+                            } else if (state is EpisodeError) {
+                              debugPrint(state.error.toUpperCase());
+                            }
+                            return const SizedBox();
+                          })
                         ],
                       )),
                 )

@@ -3,23 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
 import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
+import 'package:rick_and_morty/features/location/presentation/pages/location_info_page.dart';
 
 import '../../core/config/theme/app_colors.dart';
 
 class LocationCards extends StatelessWidget {
   final String text;
   final String title;
+  final String type;
   const LocationCards({
     super.key,
     required this.text,
     required this.title,
+    required this.type
   });
 
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => context.router.push(const LocationInfoRoute()),
+      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => LocationInfoPage(type: type, name: title, dimension: text,))),
       child: Container(
         width: double.infinity,
         height: MediaQuery.of(context).size.height * 0.26,

@@ -5,21 +5,25 @@ import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/theme/app_colors.dart';
 import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
-import 'package:rick_and_morty/features/character/presentation/cubits/character_cubit.dart';
-import 'package:rick_and_morty/features/character/presentation/cubits/character_state.dart';
 import 'package:rick_and_morty/features/location/presentation/provider/location_provider.dart';
+import 'package:rick_and_morty/features/main/presentation/cubits/character_cubit.dart';
+import 'package:rick_and_morty/features/main/presentation/cubits/character_state.dart';
 import 'package:rick_and_morty/features/widgets/back_btn.dart';
 import 'package:rick_and_morty/features/widgets/grid_list_item.dart';
 
 @RoutePage()
 class LocationInfoPage extends StatelessWidget {
-  const LocationInfoPage({super.key});
+  final String? name;
+  final String? dimension;
+  final String? type;
+  
+  const LocationInfoPage(
+      {super.key, this.name, this.dimension, this.type});
 
   @override
   Widget build(BuildContext context) {
-    final vm = Provider.of<LocationProvider>(context);
+    // final vm = Provider.of<LocationProvider>(context);
     BlocProvider.of<CharacterCubit>(context).getDataCharacter();
-    print(vm.getCharacterModel.results?[0].name);
     return Scaffold(
       body: Stack(
         children: [
@@ -50,14 +54,14 @@ class LocationInfoPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Земля C-137",
+                      name ?? "",
                       style: AppFonts.s24w700.copyWith(color: AppColors.white),
                     ),
                     const SizedBox(
                       height: 3,
                     ),
                     Text(
-                      "Мир Измерение С-137",
+                      "${type ?? ''}-${dimension ?? ''}",
                       style: AppFonts.s12w400.copyWith(color: AppColors.grey),
                     ),
                     const SizedBox(
@@ -85,7 +89,7 @@ class LocationInfoPage extends StatelessWidget {
                         );
                       } else if (state is CharacterSuccess) {
                         return SizedBox(
-                          height: MediaQuery.of(context).size.height * 0.35,
+                            height: MediaQuery.of(context).size.height * 0.35,
                             child: ListView.separated(
                                 physics: const AlwaysScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {

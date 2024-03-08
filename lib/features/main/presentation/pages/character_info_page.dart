@@ -1,30 +1,55 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
 import 'package:rick_and_morty/core/config/theme/app_colors.dart';
 import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
-import 'package:rick_and_morty/features/widgets/arrow_back_btn.dart';
+import 'package:rick_and_morty/features/location/presentation/provider/location_provider.dart';
+import 'package:rick_and_morty/features/widgets/back_btn.dart';
 import 'package:rick_and_morty/features/widgets/character_info_tile.dart';
-import 'package:rick_and_morty/features/widgets/grid_list_item.dart';
 
 @RoutePage()
 class CharacterInfoPage extends StatelessWidget {
-  const CharacterInfoPage({super.key});
+  const CharacterInfoPage(
+      {super.key, this.name, this.gender, this.species, this.status, this.img});
+  final String? name;
+  final String? gender;
+  final String? species;
+  final String? status;
+  final String? img;
 
   @override
   Widget build(BuildContext context) {
+    final vm = Provider.of<LocationProvider>(context);
+    print(vm.gender);
+    print(vm.name);
+
     return Scaffold(
       body: Stack(
         children: [
           Image.asset(Images.rickbg),
+          Positioned(
+            top: 40,
+            left: 6,
+            child: BackBtn(onPressed: () {
+              context.router.pop();
+            }),
+          ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 180, horizontal: 135),
-            child: CircleAvatar(
-              radius: 80,
-              child: Image.asset(
-                Images.rickava,
-              ),
+            child: Container(
+              width: 160,
+             decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.darkTheme
+             ),
+             child: Padding(
+               padding: const EdgeInsets.all(8.0),
+               child: ClipOval(
+                child: Image.network(img ?? "",),
+               ),
+             ),
             ),
           ),
           Padding(
@@ -36,14 +61,14 @@ class CharacterInfoPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "Рик Cанчез",
+                      name ?? "",
                       style: AppFonts.s34w400.copyWith(color: AppColors.white),
                     ),
                     const SizedBox(
                       height: 4,
                     ),
                     Text(
-                      "Живой",
+                      status ?? "",
                       style: AppFonts.s10w500.copyWith(color: AppColors.green),
                     ),
                     const SizedBox(
@@ -70,7 +95,7 @@ class CharacterInfoPage extends StatelessWidget {
                                   .copyWith(color: AppColors.grey),
                             ),
                             Text(
-                              "Мужской",
+                              gender ?? "",
                               style: AppFonts.s14w400
                                   .copyWith(color: AppColors.white),
                             ),
@@ -88,7 +113,7 @@ class CharacterInfoPage extends StatelessWidget {
                                   .copyWith(color: AppColors.grey),
                             ),
                             Text(
-                              "Человек",
+                              species ?? "",
                               style: AppFonts.s14w400
                                   .copyWith(color: AppColors.white),
                             ),
@@ -137,12 +162,12 @@ class CharacterInfoPage extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    GridItem(
-                      status: "Серия 1",
-                      name: "Пилот",
-                      img: Images.rick,
-                      species: "2 декабря 2013",
-                    )
+                    // GridItem(
+                    //   status: "Серия 1",
+                    //   name: "Пилот",
+                    //   img: Images.rick,
+                    //   species: "2 декабря 2013",
+                    // )
                   ],
                 ),
               ),

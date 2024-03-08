@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/features/character/data/character_model.dart';
+
 
 class LocationProvider extends ChangeNotifier {
-  CharacterModel? model;
-  void setModel(CharacterModel model) {
-    model = this.model ?? CharacterModel();
+  String? status;
+  String? name;
+  String? species;
+  String? gender;
+  String? img;
+  void getModel(
+      {required String nameM,
+      required String statusM,
+      required String speciesM,
+      required String genderM,
+      required String imgM}) {
+    status = statusM;
+    name = nameM;
+    species = speciesM;
+    gender = genderM;
+    img = genderM;
   }
-
-  CharacterModel get getCharacterModel => model ?? CharacterModel();
+  
 }
