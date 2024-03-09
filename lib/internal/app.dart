@@ -3,7 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/router/app_router.dart';
 import 'package:rick_and_morty/core/config/settings/dio_settings.dart';
-import 'package:rick_and_morty/core/config/theme/app_colors.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/dark_theme.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/light_theme.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/theme_manager.dart';
 import 'package:rick_and_morty/features/episode/domain/episode_impl.dart';
 import 'package:rick_and_morty/features/episode/domain/episode_usecase.dart';
 import 'package:rick_and_morty/features/episode/presentation/cubit/episode_cubit.dart';
@@ -14,18 +16,48 @@ import 'package:rick_and_morty/features/location/presentation/provider/location_
 import 'package:rick_and_morty/features/main/domain/character_impl.dart';
 import 'package:rick_and_morty/features/main/domain/character_usecase.dart';
 import 'package:rick_and_morty/features/main/presentation/cubits/character_cubit.dart';
+import 'package:rick_and_morty/features/settings/presentation/provider/theme_settings_provider.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  // @override
+  // void initState() {
+  //   themeManager.addListener(() {
+  //     themeMounted();
+  //   });
+  //   super.initState(); 
+  // }
+
+  // @override
+  // void dispose() {
+  //   themeManager.removeListener(() {
+  //     themeMounted();
+  //   });
+  //   super.dispose();
+  // }
+
+  // themeMounted() {
+  //   if (mounted) {
+  //     setState(() {});
+  //   }
+  // }
+
+  
+  @override
   Widget build(BuildContext context) {
+    ThemeManager themeManager = ThemeManager();
+    print(themeManager.getThemeMode);
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
           create: (context) => DioSettings(),
         ),
-
         RepositoryProvider(
             create: (context) => EpisodeUseCase(
                 dio: RepositoryProvider.of<DioSettings>(context).dio)),
@@ -62,20 +94,20 @@ class MyApp extends StatelessWidget {
                 repository: RepositoryProvider.of<LocationImpl>(context)),
           ),
         ],
-        child: ChangeNotifierProvider(
-          create: (context) => LocationProvider(),
-          child: MaterialApp.router(
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-                useMaterial3: false,
-                appBarTheme: const AppBarTheme(
-                    elevation: 0, backgroundColor: AppColors.darkTheme),
-                bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-                    backgroundColor: AppColors.textFieldColor),
-                scaffoldBackgroundColor: AppColors.darkTheme),
-            routerConfig: AppRouter().config(),
-          ),
-        ),
+        child: MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (_) => ThemeManager()),
+              ChangeNotifierProvider(create: (_) => LocationProvider()),
+              ChangeNotifierProvider(create: (_) => ThemeSettings()),
+              
+            ],
+            child: MaterialApp.router(
+              // debugShowCheckedModeBanner: false,
+              theme: lightTheme,
+              themeMode: themeManager.getThemeMode,
+              darkTheme: darkTheme,
+              routerConfig: AppRouter().config(),
+            )),
       ),
     );
   }

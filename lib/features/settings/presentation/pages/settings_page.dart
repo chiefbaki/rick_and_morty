@@ -1,9 +1,12 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
-import 'package:rick_and_morty/core/config/theme/app_colors.dart';
-import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/theme_manager.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
+import 'package:rick_and_morty/features/settings/presentation/provider/theme_settings_provider.dart';
 import 'package:rick_and_morty/features/widgets/arrow_back_btn.dart';
 import 'package:rick_and_morty/features/widgets/edit_btn.dart';
 
@@ -23,8 +26,10 @@ class _SettingsPageState extends State<SettingsPage> {
     "В режиме энергоснабжения"
   ];
   String currentOption = "not selected";
+  ThemeManager themeManager = ThemeManager();
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeSettings>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -103,6 +108,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 ),
                 trailing: ArrowBackBtn(
                   onPressed: () {
+                    setState(() {});
                     showDialog(
                         context: context,
                         builder: (context) {
@@ -131,40 +137,56 @@ class _SettingsPageState extends State<SettingsPage> {
                               height: 200,
                               child: Column(
                                 children: [
-                                  RadioListTile(
-                                      hoverColor: AppColors.white,
-                                      title: Text(
-                                        "Выключено",
-                                        style: AppFonts.s16w400
-                                            .copyWith(color: AppColors.white),
-                                      ),
-                                      value: options[0],
-                                      groupValue: currentOption,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          currentOption = val!;
-                                        });
-                                      }),
-                                  RadioListTile(
-                                      title: Text(
-                                        "Включено",
-                                        style: AppFonts.s16w400
-                                            .copyWith(color: AppColors.white),
-                                      ),
-                                      value: options[1],
-                                      groupValue: currentOption,
-                                      onChanged: (val) {
-                                        setState(() {
-                                          currentOption = val!;
-                                        });
-                                      }),
+                                  ElevatedButton(onPressed: (){
+                                    themeManager.toggleTheme();
+                                  }, child: Text("Выключено")),
+                                  ElevatedButton(onPressed: (){
+                                    themeManager.toggleTheme();
+                                  }, child: Text("Включено")),
+                                  // RadioListTile(
+                                  //     hoverColor: AppColors.white,
+                                  //     title: Text(
+                                  //       "Выключено",
+                                  //       style: AppFonts.s16w400
+                                  //           .copyWith(color: AppColors.white),
+                                  //     ),
+                                  //     value: options[0],
+                                  //     groupValue: currentOption,
+                                  //     onChanged: (val) {
+                                  //       setState(() {
+                                  //         currentOption = val!;
+                                  //         print(val);
+                                  //         themeManager.toggleTheme();
+                                  //       });
+                                        
+                                  //       // theme.changeTheme();
+                                  //       // print(theme.darkThemeBool);
+                                  //     }),
+                                  // RadioListTile(
+                                  //     title: Text(
+                                  //       "Включено",
+                                  //       style: AppFonts.s16w400
+                                  //           .copyWith(color: AppColors.white),
+                                  //     ),
+                                  //     value: options[1],
+                                  //     groupValue: currentOption,
+                                  //     onChanged: (val) {
+                                  //       setState(() {
+                                  //         currentOption = val!;
+                                  //         print(val);
+                                  //         themeManager.toggleTheme();
+                                  //       });
+                                        
+                                  //       // theme.changeTheme();
+                                  //       // print(theme.darkThemeBool);
+                                  //     }),
                                   RadioListTile(
                                       title: Text(
                                         "Следовать настройкам системы",
                                         style: AppFonts.s16w400
                                             .copyWith(color: AppColors.white),
                                       ),
-                                      value: options[1],
+                                      value: options[2],
                                       groupValue: currentOption,
                                       onChanged: (val) {
                                         setState(() {

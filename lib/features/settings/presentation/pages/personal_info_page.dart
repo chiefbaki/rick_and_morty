@@ -1,8 +1,8 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
-import 'package:rick_and_morty/core/config/theme/app_colors.dart';
-import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
 import 'package:rick_and_morty/features/widgets/back_btn.dart';
 import 'package:rick_and_morty/features/widgets/edit_image_btn.dart';

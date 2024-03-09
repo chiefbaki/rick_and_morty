@@ -1,11 +1,11 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
-import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
+import 'package:provider/provider.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
 import 'package:rick_and_morty/features/location/presentation/pages/location_info_page.dart';
+import 'package:rick_and_morty/features/settings/presentation/provider/theme_settings_provider.dart';
 
-import '../../core/config/theme/app_colors.dart';
+import '../../core/utils/extensions/theme/src/app_colors.dart';
 
 class LocationCards extends StatelessWidget {
   final String text;
@@ -21,6 +21,7 @@ class LocationCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Provider.of<ThemeSettings>(context);
     return InkWell(
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => LocationInfoPage(type: type, name: title, dimension: text,))),
       child: Container(
@@ -29,6 +30,7 @@ class LocationCards extends StatelessWidget {
         decoration: BoxDecoration(
           color: AppColors.textFieldColor,
           borderRadius: BorderRadius.circular(20),
+          border: Border.all(color: AppColors.textFieldColor)
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

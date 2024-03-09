@@ -2,8 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
-import 'package:rick_and_morty/core/config/theme/app_colors.dart';
-import 'package:rick_and_morty/core/config/theme/app_fonts.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
 import 'package:rick_and_morty/features/location/presentation/provider/location_provider.dart';
 import 'package:rick_and_morty/features/main/data/character_model.dart';
@@ -34,7 +34,6 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<CharacterCubit>(context).getDataCharacter();
-    
     return Scaffold(
       body: SafeArea(
         child: Center(

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:rick_and_morty/core/config/theme/app_colors.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
 
 class ArrowBackBtn extends StatelessWidget {
   final Function() onPressed;
