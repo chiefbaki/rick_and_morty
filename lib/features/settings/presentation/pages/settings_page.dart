@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
+import 'package:rick_and_morty/core/utils/constants/consts.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/theme_manager.dart';
@@ -9,6 +10,7 @@ import 'package:rick_and_morty/core/utils/resources/resources.dart';
 import 'package:rick_and_morty/features/settings/presentation/provider/theme_settings_provider.dart';
 import 'package:rick_and_morty/features/widgets/arrow_back_btn.dart';
 import 'package:rick_and_morty/features/widgets/edit_btn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
 class SettingsPage extends StatefulWidget {
@@ -27,9 +29,29 @@ class _SettingsPageState extends State<SettingsPage> {
   ];
   String currentOption = "not selected";
   ThemeManager themeManager = ThemeManager();
+
+  void loadData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+
+    name = prefs.getString(AppKeys.name) ?? "";
+    lastName = prefs.getString(AppKeys.lastName) ?? "";
+    email = prefs.getString(AppKeys.email) ?? "";
+
+    setState(() {});
+  }
+
+  late String name = "name";
+  late String lastName = "name";
+  late String email = "name";
+
+  @override
+  void initState() {
+    super.initState();
+    loadData();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final theme = Provider.of<ThemeSettings>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -57,12 +79,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Oleg Belotserkovsky",
+                        "$name $lastName",
                         style:
                             AppFonts.s16w400.copyWith(color: AppColors.white),
                       ),
                       Text(
-                        "Rick",
+                        email,
                         style: AppFonts.s16w400.copyWith(color: AppColors.grey),
                       ),
                     ],
@@ -137,12 +159,16 @@ class _SettingsPageState extends State<SettingsPage> {
                               height: 200,
                               child: Column(
                                 children: [
-                                  ElevatedButton(onPressed: (){
-                                    themeManager.toggleTheme();
-                                  }, child: Text("Выключено")),
-                                  ElevatedButton(onPressed: (){
-                                    themeManager.toggleTheme();
-                                  }, child: Text("Включено")),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        themeManager.toggleTheme();
+                                      },
+                                      child: Text("Выключено")),
+                                  ElevatedButton(
+                                      onPressed: () {
+                                        themeManager.toggleTheme();
+                                      },
+                                      child: Text("Включено")),
                                   // RadioListTile(
                                   //     hoverColor: AppColors.white,
                                   //     title: Text(
@@ -158,7 +184,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   //         print(val);
                                   //         themeManager.toggleTheme();
                                   //       });
-                                        
+
                                   //       // theme.changeTheme();
                                   //       // print(theme.darkThemeBool);
                                   //     }),
@@ -176,7 +202,7 @@ class _SettingsPageState extends State<SettingsPage> {
                                   //         print(val);
                                   //         themeManager.toggleTheme();
                                   //       });
-                                        
+
                                   //       // theme.changeTheme();
                                   //       // print(theme.darkThemeBool);
                                   //     }),
