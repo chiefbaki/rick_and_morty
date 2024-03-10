@@ -7,7 +7,7 @@ class EpisodeImpl implements EpisodeRep {
   EpisodeImpl({required this.useCase});
 
   @override
-  Future<EpisodeModel> getEpisode() {
-    return useCase.getEpisode();
+  Future<EpisodeModel> getEpisode(String? query) {
+    return useCase.getEpisode(query);
   }
 }

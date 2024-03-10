@@ -6,9 +6,11 @@ import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
 import 'package:rick_and_morty/features/main/presentation/cubits/character_cubit.dart';
 import 'package:rick_and_morty/features/main/presentation/cubits/character_state.dart';
+import 'package:rick_and_morty/features/widgets/custom_circle_progress.dart';
 import 'package:rick_and_morty/features/widgets/custom_text_field.dart';
 import 'package:rick_and_morty/features/widgets/grid_list_item.dart';
 import 'package:rick_and_morty/features/widgets/list_item.dart';
+import 'package:rick_and_morty/features/widgets/not_found_widget.dart';
 
 @RoutePage()
 class MainPage extends StatefulWidget {
@@ -49,12 +51,7 @@ class _MainPageState extends State<MainPage> {
                   BlocBuilder<CharacterCubit, CharacterState>(
                       builder: (context, state) {
                     if (state is CharacterLoading) {
-                      return const Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 300),
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
+                      return const CustomCircleProgress();
                     } else if (state is CharacterSuccess) {
                       final results = state.model?.results ?? [];
                       return Column(
@@ -135,30 +132,7 @@ class _MainPageState extends State<MainPage> {
                       );
                     } else if (state is CharacterError) {
                       debugPrint(state.error.toUpperCase());
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 100),
-                        child: Center(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                Images.notFound,
-                                width: 150,
-                                height: 251,
-                              ),
-                              const SizedBox(
-                                height: 26,
-                              ),
-                              Text(
-                                "Персонаж с таким именем не найден",
-                                style: AppFonts.s16w400
-                                    .copyWith(color: AppColors.grey),
-                                textAlign: TextAlign.center,
-                              )
-                            ],
-                          ),
-                        ),
-                      );
+                      return const NotFoundWidget(img: Images.notFound);
                     }
                     return const SizedBox();
                   }),

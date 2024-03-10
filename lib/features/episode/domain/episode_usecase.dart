@@ -7,8 +7,10 @@ class EpisodeUseCase {
 
   EpisodeUseCase({required this.dio});
 
-  Future<EpisodeModel> getEpisode() async {
-    final Response response = await dio.get(ApiConsts.episode);
+  Future<EpisodeModel> getEpisode(String? query) async {
+    final Response response = await dio.get(ApiConsts.episode, queryParameters: {
+      "name": query
+    });
     return EpisodeModel.fromJson(response.data);
   }
 }

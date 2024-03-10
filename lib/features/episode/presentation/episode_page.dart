@@ -2,9 +2,12 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
+import 'package:rick_and_morty/core/utils/resources/resources.dart';
 import 'package:rick_and_morty/features/episode/presentation/cubit/episode_cubit.dart';
+import 'package:rick_and_morty/features/widgets/custom_circle_progress.dart';
 import 'package:rick_and_morty/features/widgets/custom_text_field.dart';
 import 'package:rick_and_morty/features/widgets/episode_item.dart';
+import 'package:rick_and_morty/features/widgets/not_found_widget.dart';
 
 @RoutePage()
 class EpisodePage extends StatelessWidget {
@@ -13,7 +16,7 @@ class EpisodePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextEditingController controller = TextEditingController();
-    BlocProvider.of<EpisodeCubit>(context).getEpisodes();
+    BlocProvider.of<EpisodeCubit>(context).getEpisodes('');
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -24,8 +27,8 @@ class EpisodePage extends StatelessWidget {
                 CustomTextField(
                   controller: controller,
                   hintText: "Найти эпизод",
-                  onTextChanged: (p0) {
-                    
+                  onTextChanged: (value) {
+                    context.read<EpisodeCubit>().getEpisodes(value);
                   },
                 ),
                 const SizedBox(
@@ -66,10 +69,9 @@ class EpisodePage extends StatelessWidget {
                           BlocBuilder<EpisodeCubit, EpisodeState>(
                               builder: (context, state) {
                             if (state is EpisodeLoading) {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
+                              return const CustomCircleProgress();
                             } else if (state is EpisodeSuccess) {
+                              final results = state.model.results;
                               return Expanded(
                                 child: TabBarView(children: [
                                   ListView.separated(
@@ -83,12 +85,21 @@ class EpisodePage extends StatelessWidget {
                                           series: state.model.results?[index]
                                                   .episode ??
                                               "",
-                                          name: state
-                                                  .model.results?[index].name ??
-                                              "",
-                                          date: state.model.results?[index]
-                                                  .airDate ??
-                                              "",
+                                          name: results?[index].name ?? "",
+                                          date: results?[index].airDate ?? "",
+                                        );
+                                      },
+                                      itemCount: results?.length ?? 0),
+                                  ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(
+                                            height: 24,
+                                          ),
+                                      itemBuilder: (context, index) {
+                                        return EpisodeItem(
+                                          series: results?[index].episode ?? "",
+                                          name: results?[index].name ?? "",
+                                          date: results?[index].airDate ?? "",
                                         );
                                       },
                                       itemCount:
@@ -100,15 +111,22 @@ class EpisodePage extends StatelessWidget {
                                           ),
                                       itemBuilder: (context, index) {
                                         return EpisodeItem(
-                                          series: state.model.results?[index]
-                                                  .episode ??
-                                              "",
-                                          name: state
-                                                  .model.results?[index].name ??
-                                              "",
-                                          date: state.model.results?[index]
-                                                  .airDate ??
-                                              "",
+                                          series: results?[index].episode ?? "",
+                                          name: results?[index].name ?? "",
+                                          date: results?[index].airDate ?? "",
+                                        );
+                                      },
+                                      itemCount: results?.length ?? 0),
+                                  ListView.separated(
+                                      separatorBuilder: (context, index) =>
+                                          const SizedBox(
+                                            height: 24,
+                                          ),
+                                      itemBuilder: (context, index) {
+                                        return EpisodeItem(
+                                          series: results?[index].episode ?? "",
+                                          name: results?[index].name ?? "",
+                                          date: results?[index].airDate ?? "",
                                         );
                                       },
                                       itemCount:
@@ -120,55 +138,9 @@ class EpisodePage extends StatelessWidget {
                                           ),
                                       itemBuilder: (context, index) {
                                         return EpisodeItem(
-                                          series: state.model.results?[index]
-                                                  .episode ??
-                                              "",
-                                          name: state
-                                                  .model.results?[index].name ??
-                                              "",
-                                          date: state.model.results?[index]
-                                                  .airDate ??
-                                              "",
-                                        );
-                                      },
-                                      itemCount:
-                                          state.model.results?.length ?? 0),
-                                  ListView.separated(
-                                      separatorBuilder: (context, index) =>
-                                          const SizedBox(
-                                            height: 24,
-                                          ),
-                                      itemBuilder: (context, index) {
-                                        return EpisodeItem(
-                                          series: state.model.results?[index]
-                                                  .episode ??
-                                              "",
-                                          name: state
-                                                  .model.results?[index].name ??
-                                              "",
-                                          date: state.model.results?[index]
-                                                  .airDate ??
-                                              "",
-                                        );
-                                      },
-                                      itemCount:
-                                          state.model.results?.length ?? 0),
-                                  ListView.separated(
-                                      separatorBuilder: (context, index) =>
-                                          const SizedBox(
-                                            height: 24,
-                                          ),
-                                      itemBuilder: (context, index) {
-                                        return EpisodeItem(
-                                          series: state.model.results?[index]
-                                                  .episode ??
-                                              "",
-                                          name: state
-                                                  .model.results?[index].name ??
-                                              "",
-                                          date: state.model.results?[index]
-                                                  .airDate ??
-                                              "",
+                                          series: results?[index].episode ?? "",
+                                          name: results?[index].name ?? "",
+                                          date: results?[index].airDate ?? "",
                                         );
                                       },
                                       itemCount:
@@ -177,6 +149,7 @@ class EpisodePage extends StatelessWidget {
                               );
                             } else if (state is EpisodeError) {
                               debugPrint(state.error.toUpperCase());
+                              return const NotFoundWidget(img: Images.potato);
                             }
                             return const SizedBox();
                           })

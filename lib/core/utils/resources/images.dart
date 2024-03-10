@@ -4,6 +4,7 @@ class Images {
   Images._();
 
   static const String character = 'assets/images/character.svg';
+  static const String cucumber = 'assets/images/cucumber.png';
   static const String divider = 'assets/images/divider.png';
   static const String earth = 'assets/images/earth.png';
   static const String earth1 = 'assets/images/earth1.png';
@@ -18,6 +19,7 @@ class Images {
   static const String notFound = 'assets/images/notFound.png';
   static const String palette = 'assets/images/palette.png';
   static const String pass = 'assets/images/pass.png';
+  static const String potato = 'assets/images/potato.png';
   static const String rick = 'assets/images/rick.png';
   static const String rickava = 'assets/images/rickava.png';
   static const String rickbg = 'assets/images/rickbg.png';

@@ -3,9 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
+import 'package:rick_and_morty/core/utils/resources/resources.dart';
 import 'package:rick_and_morty/features/location/presentation/cubit/location_cubit_cubit.dart';
+import 'package:rick_and_morty/features/widgets/custom_circle_progress.dart';
 import 'package:rick_and_morty/features/widgets/custom_text_field.dart';
 import 'package:rick_and_morty/features/widgets/location_cards.dart';
+import 'package:rick_and_morty/features/widgets/not_found_widget.dart';
 
 @RoutePage()
 class LocationPage extends StatelessWidget {
@@ -37,12 +40,7 @@ class LocationPage extends StatelessWidget {
                   BlocBuilder<LocationCubit, LocationState>(
                       builder: (context, state) {
                     if (state is LocationLoading) {
-                      return const Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(vertical: 300),
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
+                      return const CustomCircleProgress();
                     }
                     if (state is LocationSuccess) {
                       final results = state.model?.results ?? [];
@@ -62,13 +60,9 @@ class LocationPage extends StatelessWidget {
                             child: ListView.separated(
                                 itemBuilder: (context, index) {
                                   return LocationCards(
-                                    type:
-                                        results[index].type ?? "",
-                                    text:
-                                        results[index].dimension ??
-                                            "",
-                                    title:
-                                        results[index].name ?? "",
+                                    type: results[index].type ?? "",
+                                    text: results[index].dimension ?? "",
+                                    title: results[index].name ?? "",
                                   );
                                 },
                                 separatorBuilder: (context, index) {
@@ -82,6 +76,7 @@ class LocationPage extends StatelessWidget {
                       );
                     } else if (state is LocationError) {
                       debugPrint(state.error.toString().toUpperCase());
+                      return const NotFoundWidget(img: Images.cucumber);
                     }
                     return const SizedBox();
                   }),
@@ -92,3 +87,4 @@ class LocationPage extends StatelessWidget {
     );
   }
 }
+

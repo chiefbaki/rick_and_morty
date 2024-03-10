@@ -8,10 +8,10 @@ part 'episode_state.dart';
 class EpisodeCubit extends Cubit<EpisodeState> {
   EpisodeCubit({required this.repository}) : super(EpisodeInitial());
 
-  Future<void> getEpisodes() async {
+  Future<void> getEpisodes(String? query) async {
     emit(EpisodeLoading());
     try {
-      final EpisodeModel model = await repository.getEpisode();
+      final EpisodeModel model = await repository.getEpisode(query);
       emit(EpisodeSuccess(model: model));
     } catch (e) {
       emit(EpisodeError(error: e.toString()));
