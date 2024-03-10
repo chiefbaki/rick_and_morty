@@ -6,7 +6,7 @@ class LocationImpl implements LocationRep {
   final LocationUseCase useCase;
   LocationImpl({required this.useCase});
   @override
-  Future<LocationModel> getLocation() {
-    return useCase.getModel();
+  Future<LocationModel> getLocation(String? query) {
+    return useCase.getModel(query);
   }
 }

@@ -8,8 +8,8 @@ final class LocationInitial extends LocationState {}
 final class LocationLoading extends LocationState {}
 
 final class LocationSuccess extends LocationState {
-  final LocationModel model;
-  LocationSuccess({required this.model});
+  final LocationModel? model;
+  LocationSuccess({this.model});
 }
 
 final class LocationError extends LocationState {

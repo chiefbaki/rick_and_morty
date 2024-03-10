@@ -17,15 +17,5 @@ class CharacterCubit extends Cubit<CharacterState> {
     }
   }
 
-  // Future<void> getCharacterResults(String query) async {
-  //   emit(CharacterLoading());
-  //   try {
-  //     final List<Results> model = await repository.getUserList();
-  //     emit(CharacterSuccess(results: model));
-  //   } catch (e) {
-  //     emit(CharacterError(error: e.toString()));
-  //   }
-  // }
-
   final CharacterRep repository;
 }

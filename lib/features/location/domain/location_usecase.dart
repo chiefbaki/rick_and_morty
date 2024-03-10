@@ -7,8 +7,10 @@ class LocationUseCase {
 
   LocationUseCase({required this.dio});
 
-  Future<LocationModel> getModel() async {
-    final Response response = await dio.get(ApiConsts.location);
+  Future<LocationModel> getModel(String? query) async {
+    final Response response = await dio.get(ApiConsts.location, queryParameters: {
+      "name": query
+    });
     return LocationModel.fromJson(response.data);
   }
 }

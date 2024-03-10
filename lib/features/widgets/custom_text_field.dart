@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
-import 'package:rick_and_morty/features/main/presentation/cubits/character_cubit.dart';
-import 'package:rick_and_morty/features/main/presentation/pages/search_character_page.dart';
+
 
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;

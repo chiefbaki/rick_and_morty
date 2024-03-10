@@ -57,7 +57,6 @@ class _MainPageState extends State<MainPage> {
                       );
                     } else if (state is CharacterSuccess) {
                       final results = state.model?.results ?? [];
-
                       return Column(
                         children: [
                           Row(

@@ -1,5 +1,6 @@
 abstract class ApiConsts {
-  static const String characters = "https://rickandmortyapi.com/api/character";
-  static const String location = "https://rickandmortyapi.com/api/location";
-  static const String episode = "https://rickandmortyapi.com/api/episode";
+  static const String characters = "character/";
+  static const String location = "location/";
+  static const String episode = "episode/";
+  static const String baseUrl = "https://rickandmortyapi.com/api/";
 }

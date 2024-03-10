@@ -8,11 +8,12 @@ part 'location_cubit_state.dart';
 class LocationCubit extends Cubit<LocationState> {
   LocationCubit({required this.repository}) : super(LocationInitial());
 
-  Future<void> getLocationData() async {
+  Future<void> getLocationData(String? query) async {
     emit(LocationLoading());
     try {
-      final LocationModel model = await repository.getLocation();
+      final LocationModel model = await repository.getLocation(query);
       emit(LocationSuccess(model: model));
+      print(query);
     } catch (e) {
       emit(LocationError(error: e.toString()));
     }

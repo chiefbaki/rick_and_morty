@@ -13,63 +13,80 @@ class LocationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<LocationCubit>(context).getLocationData();
+    BlocProvider.of<LocationCubit>(context).getLocationData('');
     final TextEditingController controller = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            child: BlocBuilder<LocationCubit, LocationState>(
-                builder: (context, state) {
-              if (state is LocationLoading) {
-                debugPrint("loading");
-                return const Center(
-                  child: CircularProgressIndicator(),
-                );
-              }
-              if (state is LocationSuccess) {
-                debugPrint("success");
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    CustomTextField(controller: controller, hintText: "Найти локацию", onTextChanged: (p0) {
-                      
-                    },),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    Text(
-                      "ВСЕГО ЛОКАЦИЙ: ${state.model.info!.count}",
-                      style: AppFonts.s10w500.copyWith(color: AppColors.grey),
-                    ),
-                    const SizedBox(
-                      height: 24,
-                    ),
-                    Expanded(
-                      child: ListView.separated(
-                          itemBuilder: (context, index) {
-                            return LocationCards(
-                              type: state.model.results?[index].type ?? "",
-                              text: state.model.results?[index].dimension ?? "",
-                              title: state.model.results?[index].name ?? "",
-                            );
-                          },
-                          separatorBuilder: (context, index) {
-                            return const SizedBox(
-                              height: 24,
-                            );
-                          },
-                          itemCount: state.model.results!.length),
-                    )
-                  ],
-                );
-              } else if (state is LocationError) {
-                debugPrint(state.error.toString().toUpperCase());
-              }
-              return const SizedBox();
-            }),
-          ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CustomTextField(
+                    controller: controller,
+                    hintText: "Найти локацию",
+                    onTextChanged: (value) {
+                      context.read<LocationCubit>().getLocationData(value);
+                      print(value);
+                    },
+                  ),
+                  const SizedBox(
+                    height: 24,
+                  ),
+                  BlocBuilder<LocationCubit, LocationState>(
+                      builder: (context, state) {
+                    if (state is LocationLoading) {
+                      return const Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 300),
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    if (state is LocationSuccess) {
+                      final results = state.model?.results ?? [];
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "ВСЕГО ЛОКАЦИЙ: ${state.model?.info!.count}",
+                            style: AppFonts.s10w500
+                                .copyWith(color: AppColors.grey),
+                          ),
+                          const SizedBox(
+                            height: 24,
+                          ),
+                          SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.67,
+                            child: ListView.separated(
+                                itemBuilder: (context, index) {
+                                  return LocationCards(
+                                    type:
+                                        results[index].type ?? "",
+                                    text:
+                                        results[index].dimension ??
+                                            "",
+                                    title:
+                                        results[index].name ?? "",
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const SizedBox(
+                                    height: 24,
+                                  );
+                                },
+                                itemCount: results.length),
+                          )
+                        ],
+                      );
+                    } else if (state is LocationError) {
+                      debugPrint(state.error.toString().toUpperCase());
+                    }
+                    return const SizedBox();
+                  }),
+                ],
+              )),
         ),
       ),
     );
