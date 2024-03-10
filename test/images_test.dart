@@ -17,6 +17,7 @@ void main() {
     expect(File(Images.list).existsSync(), isTrue);
     expect(File(Images.location).existsSync(), isTrue);
     expect(File(Images.morty).existsSync(), isTrue);
+    expect(File(Images.notFound).existsSync(), isTrue);
     expect(File(Images.palette).existsSync(), isTrue);
     expect(File(Images.pass).existsSync(), isTrue);
     expect(File(Images.rick).existsSync(), isTrue);

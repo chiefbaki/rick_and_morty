@@ -6,7 +6,13 @@ class CharacterImpl implements CharacterRep {
   final CharacterUseCase useCase;
   CharacterImpl({required this.useCase});
   @override
-  Future<CharacterModel> getCharacter() async {
-    return useCase.getCharacter();
+  Future<CharacterModel> getCharacter(String? query) async {
+    return useCase.getCharacter(query);
   }
+
+  // @override
+  // Future<List<Results>> getUserList({String? query}) async {
+  //   return useCase.getUserList();
+  // }
+  
 }

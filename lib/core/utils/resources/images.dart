@@ -15,6 +15,7 @@ class Images {
   static const String list = 'assets/images/list.png';
   static const String location = 'assets/images/location.svg';
   static const String morty = 'assets/images/morty.png';
+  static const String notFound = 'assets/images/notFound.png';
   static const String palette = 'assets/images/palette.png';
   static const String pass = 'assets/images/pass.png';
   static const String rick = 'assets/images/rick.png';

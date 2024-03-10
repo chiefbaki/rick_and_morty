@@ -33,7 +33,9 @@ class LocationPage extends StatelessWidget {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    CustomTextField(controller: controller, hintText: "Найти локацию",),
+                    CustomTextField(controller: controller, hintText: "Найти локацию", onTextChanged: (p0) {
+                      
+                    },),
                     const SizedBox(
                       height: 24,
                     ),

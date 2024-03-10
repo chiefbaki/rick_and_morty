@@ -9,8 +9,9 @@ class CharacterInitial extends CharacterState {}
 class CharacterLoading extends CharacterState {}
 
 class CharacterSuccess extends CharacterState {
-  final CharacterModel model;
-  CharacterSuccess({required this.model});
+  final CharacterModel? model;
+  // final List<Results> results;
+  CharacterSuccess({this.model});
 }
 
 class CharacterError extends CharacterState {

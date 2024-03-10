@@ -7,15 +7,25 @@ import 'package:rick_and_morty/features/main/presentation/cubits/character_state
 class CharacterCubit extends Cubit<CharacterState> {
   CharacterCubit({required this.repository}) : super(CharacterInitial());
 
-  Future<void> getDataCharacter() async {
+  Future<void> getDataCharacter(String? query) async {
     emit(CharacterLoading());
     try {
-      final CharacterModel model = await repository.getCharacter();
+      final CharacterModel model = await repository.getCharacter(query);
       emit(CharacterSuccess(model: model));
     } catch (e) {
       emit(CharacterError(error: e.toString()));
     }
   }
+
+  // Future<void> getCharacterResults(String query) async {
+  //   emit(CharacterLoading());
+  //   try {
+  //     final List<Results> model = await repository.getUserList();
+  //     emit(CharacterSuccess(results: model));
+  //   } catch (e) {
+  //     emit(CharacterError(error: e.toString()));
+  //   }
+  // }
 
   final CharacterRep repository;
 }

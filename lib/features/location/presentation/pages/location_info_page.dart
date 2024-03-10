@@ -20,7 +20,7 @@ class LocationInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final vm = Provider.of<LocationProvider>(context);
-    BlocProvider.of<CharacterCubit>(context).getDataCharacter();
+    BlocProvider.of<CharacterCubit>(context).getDataCharacter('');
     return Scaffold(
       body: Stack(
         children: [
@@ -92,17 +92,17 @@ class LocationInfoPage extends StatelessWidget {
                                 itemBuilder: (context, index) {
                                   return GridItem(
                                       status:
-                                          state.model.results?[index].status ??
+                                          state.model?.results?[index].status ??
                                               "",
-                                      name: state.model.results?[index].name ??
+                                      name: state.model?.results?[index].name ??
                                           "",
-                                      img: state.model.results?[index].image ??
+                                      img: state.model?.results?[index].image ??
                                           "",
                                       species:
-                                          state.model.results?[index].species ??
+                                          state.model?.results?[index].species ??
                                               "",
                                       gender:
-                                          state.model.results?[index].gender ??
+                                          state.model?.results?[index].gender ??
                                               "");
                                 },
                                 separatorBuilder: (context, index) {

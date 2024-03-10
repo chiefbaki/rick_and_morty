@@ -21,7 +21,13 @@ class EpisodePage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
             child: Column(
               children: [
-                CustomTextField(controller: controller, hintText: "Найти эпизод",),
+                CustomTextField(
+                  controller: controller,
+                  hintText: "Найти эпизод",
+                  onTextChanged: (p0) {
+                    
+                  },
+                ),
                 const SizedBox(
                   height: 8,
                 ),
