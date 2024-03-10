@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyClS3CAKFP2fUsLq6L_vzXemfIe3EV0moU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1092228220351</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.rickAndMorty</string>
+	<key>PROJECT_ID</key>
+	<string>flutter-auth-70b29</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flutter-auth-70b29.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1092228220351:ios:9d6ba656200b1e13278d0a</string>
+</dict>
+</plist>

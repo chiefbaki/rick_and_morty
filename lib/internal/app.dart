@@ -6,6 +6,9 @@ import 'package:rick_and_morty/core/config/settings/dio_settings.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/dark_theme.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/light_theme.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/theme_manager.dart';
+import 'package:rick_and_morty/features/auth/cubit/auth_cubit.dart';
+import 'package:rick_and_morty/features/auth/domain/auth_impl.dart';
+import 'package:rick_and_morty/features/auth/domain/auth_usecase.dart';
 import 'package:rick_and_morty/features/episode/domain/episode_impl.dart';
 import 'package:rick_and_morty/features/episode/domain/episode_usecase.dart';
 import 'package:rick_and_morty/features/episode/presentation/cubit/episode_cubit.dart';
@@ -31,7 +34,7 @@ class _MyAppState extends State<MyApp> {
   //   themeManager.addListener(() {
   //     themeMounted();
   //   });
-  //   super.initState(); 
+  //   super.initState();
   // }
 
   // @override
@@ -48,7 +51,6 @@ class _MyAppState extends State<MyApp> {
   //   }
   // }
 
-  
   @override
   Widget build(BuildContext context) {
     ThemeManager themeManager = ThemeManager();
@@ -78,6 +80,13 @@ class _MyAppState extends State<MyApp> {
           create: (context) => CharacterImpl(
               useCase: RepositoryProvider.of<CharacterUseCase>(context)),
         ),
+        RepositoryProvider(
+          create: (context) => AuthUseCase(),
+        ),
+        RepositoryProvider(
+          create: (context) =>
+              AuthImpl(useCase: RepositoryProvider.of<AuthUseCase>(context)),
+        ),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -93,13 +102,16 @@ class _MyAppState extends State<MyApp> {
             create: (context) => LocationCubit(
                 repository: RepositoryProvider.of<LocationImpl>(context)),
           ),
+          BlocProvider(
+            create: (context) =>
+                AuthCubit(repository: RepositoryProvider.of<AuthImpl>(context)),
+          ),
         ],
         child: MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (_) => ThemeManager()),
               ChangeNotifierProvider(create: (_) => LocationProvider()),
               ChangeNotifierProvider(create: (_) => ThemeSettings()),
-              
             ],
             child: MaterialApp.router(
               // debugShowCheckedModeBanner: false,

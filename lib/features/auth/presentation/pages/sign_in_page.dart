@@ -14,6 +14,8 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController login = TextEditingController();
+    final TextEditingController password = TextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -40,8 +42,8 @@ class SignInPage extends StatelessWidget {
                   height: 8,
                 ),
                 AuthTextField(
-                  controller: TextEditingController(),
-                  hintText: "Логин",
+                  controller: login,
+                  hintText: "Email",
                   icon: Images.user,
                 ),
                 const SizedBox(
@@ -55,7 +57,7 @@ class SignInPage extends StatelessWidget {
                   height: 8,
                 ),
                 AuthTextField(
-                  controller: TextEditingController(),
+                  controller: password,
                   hintText: "Пароль",
                   obscureText: true,
                   icon: Images.pass,
@@ -63,7 +65,9 @@ class SignInPage extends StatelessWidget {
                 const SizedBox(
                   height: 24,
                 ),
-                CustomElevatedBtn(onPressed: () {}, label: "Войти"),
+                CustomElevatedBtn(onPressed: () {
+                  context.router.push(const DashboardRoute());
+                }, label: "Войти"),
                 const SizedBox(
                   height: 24,
                 ),
@@ -77,7 +81,7 @@ class SignInPage extends StatelessWidget {
                     CreateBtn(
                       onPressed: () {
                         context.router.push(const SignUpRoute());
-                      },
+                      }, 
                     )
                   ],
                 )

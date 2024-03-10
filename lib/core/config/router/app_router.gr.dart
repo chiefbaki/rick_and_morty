@@ -26,8 +26,6 @@ import 'package:rick_and_morty/features/main/presentation/pages/character_info_p
     as _i1;
 import 'package:rick_and_morty/features/main/presentation/pages/main_page.dart'
     as _i7;
-import 'package:rick_and_morty/features/main/presentation/pages/search_character_page.dart'
-    as _i9;
 import 'package:rick_and_morty/features/settings/presentation/pages/edit_info_page.dart'
     as _i3;
 import 'package:rick_and_morty/features/settings/presentation/pages/personal_info_page.dart'
