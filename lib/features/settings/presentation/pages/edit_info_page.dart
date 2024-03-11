@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:rick_and_morty/core/utils/constants/consts.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
 
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
@@ -8,16 +9,22 @@ import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/features/widgets/back_btn.dart';
 import 'package:rick_and_morty/features/widgets/personal_info_field.dart';
 import 'package:rick_and_morty/features/widgets/save_btn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
-class EditInfoPage extends StatelessWidget {
+class EditInfoPage extends StatefulWidget {
   const EditInfoPage({super.key});
 
   @override
+  State<EditInfoPage> createState() => _EditInfoPageState();
+}
+
+class _EditInfoPageState extends State<EditInfoPage> {
+  @override
   Widget build(BuildContext context) {
-    final TextEditingController firstNameController = TextEditingController();
-    final TextEditingController lastNameController = TextEditingController();
-    final TextEditingController middleNameController = TextEditingController();
+    final TextEditingController name = TextEditingController();
+    final TextEditingController lastName = TextEditingController();
+    final TextEditingController middleName = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         leading: BackBtn(
@@ -44,7 +51,7 @@ class EditInfoPage extends StatelessWidget {
               height: 8,
             ),
             PersonalInfoField(
-              controller: firstNameController,
+              controller: name,
               hintText: "Имя",
             ),
             const SizedBox(
@@ -58,7 +65,7 @@ class EditInfoPage extends StatelessWidget {
               height: 8,
             ),
             PersonalInfoField(
-              controller: lastNameController,
+              controller: lastName,
               hintText: "Фамилия",
             ),
             const SizedBox(
@@ -72,12 +79,20 @@ class EditInfoPage extends StatelessWidget {
               height: 8,
             ),
             PersonalInfoField(
-              controller: middleNameController,
+              controller: middleName,
               hintText: "Отчество",
             ),
             const Spacer(),
             CustomElevatedBtn(
-              onPressed: () {},
+              onPressed: () async {
+                final SharedPreferences prefs =
+                    await SharedPreferences.getInstance();
+                await prefs.setString(AppKeys.name, name.text);
+                await prefs.setString(AppKeys.lastName, lastName.text);
+                await prefs.setString(AppKeys.middleName, middleName.text);
+                
+                debugPrint("УСПЕШНО ИЗМЕНЕНО");
+              },
               label: "Сохранить",
             ),
           ],

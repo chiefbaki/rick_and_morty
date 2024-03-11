@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 
@@ -20,9 +21,11 @@ class ListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.network(
-          img,
-          width: 120,
+        ClipOval(
+          child: Image.network(
+            img,
+            width: 120,
+          ),
         ),
         const SizedBox(
           height: 18,

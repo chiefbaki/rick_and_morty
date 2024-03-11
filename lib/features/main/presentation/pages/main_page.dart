@@ -116,7 +116,7 @@ class _MainPageState extends State<MainPage> {
                                     gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
-                                            crossAxisSpacing: 16,
+                                            
                                             mainAxisSpacing: 24),
                                     itemBuilder: (context, index) {
                                       return ListItem(

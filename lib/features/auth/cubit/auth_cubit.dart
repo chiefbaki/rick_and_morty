@@ -12,9 +12,21 @@ class AuthCubit extends Cubit<AuthState> {
       {required String email, required String password}) async {
     emit(AuthLoading());
     try {
-      final UserCredential user =
+      final UserCredential signUp =
           await repository.register(email: email, password: password);
-      emit(AuthSuccess(signUp: user));
+      emit(AuthSuccess(signUp: signUp));
+    } catch (e) {
+      emit(AuthError(error: e.toString()));
+    }
+  }
+
+  Future<void> makeSignIn(
+      {required String email, required String password}) async {
+    emit(AuthLoading());
+    try {
+      final UserCredential signIn =
+          await repository.login(email: email, password: password);
+      emit(AuthSuccess(signIn: signIn));
     } catch (e) {
       emit(AuthError(error: e.toString()));
     }

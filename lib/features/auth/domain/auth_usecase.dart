@@ -9,4 +9,11 @@ class AuthUseCase {
         auth.createUserWithEmailAndPassword(email: email, password: password);
     return user;
   }
+
+  Future<UserCredential> login(
+      {required String email, required String password}) async {
+    final user =
+        auth.signInWithEmailAndPassword(email: email, password: password);
+    return user;
+  }
 }

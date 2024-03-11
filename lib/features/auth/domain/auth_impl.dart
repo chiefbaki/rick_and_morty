@@ -10,4 +10,9 @@ class AuthImpl implements AuthRep {
       {required String email, required String password}) async {
     return useCase.register(email: email, password: password);
   }
+  @override
+  Future<UserCredential> login(
+      {required String email, required String password}) async {
+    return useCase.login(email: email, password: password);
+  }
 }

@@ -31,9 +31,13 @@ class GridItem extends StatelessWidget {
         imgM: img,
         statusM: status);
     return ListTile(
-      leading: Image.network(
-        img,
-        width: 84,
+      leading: ClipOval(
+        child: Image.network(
+          img,
+          width: 60,
+          height: 74,
+          fit: BoxFit.fill,
+        ),
       ),
       title: Text(
         status,

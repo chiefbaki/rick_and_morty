@@ -7,6 +7,7 @@ import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/theme_manager.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
+import 'package:rick_and_morty/core/utils/services/shared_prefs.dart';
 import 'package:rick_and_morty/features/settings/presentation/provider/theme_settings_provider.dart';
 import 'package:rick_and_morty/features/widgets/arrow_back_btn.dart';
 import 'package:rick_and_morty/features/widgets/edit_btn.dart';
@@ -50,8 +51,11 @@ class _SettingsPageState extends State<SettingsPage> {
     loadData();
   }
 
+  
+
   @override
   Widget build(BuildContext context) {
+    final prefs = Provider.of<SharedPrefs>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(

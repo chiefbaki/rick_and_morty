@@ -1,11 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
 import 'package:rick_and_morty/core/utils/constants/consts.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
+import 'package:rick_and_morty/core/utils/services/shared_prefs.dart';
 import 'package:rick_and_morty/features/auth/cubit/auth_cubit.dart';
 import 'package:rick_and_morty/features/widgets/auth_text_field.dart';
 import 'package:rick_and_morty/features/widgets/back_btn.dart';
@@ -15,9 +17,14 @@ import 'package:rick_and_morty/features/widgets/save_btn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 @RoutePage()
-class SignUpPage extends StatelessWidget {
+class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
+
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final TextEditingController name = TextEditingController();
@@ -26,6 +33,7 @@ class SignUpPage extends StatelessWidget {
     final TextEditingController email = TextEditingController();
     final TextEditingController password = TextEditingController();
 
+    final prefs = Provider.of<SharedPrefs>(context);
     return Scaffold(
       appBar: AppBar(
         leading: BackBtn(
@@ -142,6 +150,14 @@ class SignUpPage extends StatelessWidget {
                         onPressed: () async {
                           BlocProvider.of<AuthCubit>(context).makeSignUp(
                               email: email.text, password: password.text);
+                          // prefs.initPrefs(key: AppKeys.name, value: name.text);
+                          // prefs.initPrefs(
+                          //     key: AppKeys.lastName, value: lastName.text);
+                          // prefs.initPrefs(
+                          //     key: AppKeys.middleName, value: middleName.text);
+                          // prefs.initPrefs(
+                          //     key: AppKeys.password, value: password.text);
+                          // prefs.initPrefs(key: AppKeys.email, value: email.text);
                           final SharedPreferences prefs =
                               await SharedPreferences.getInstance();
                           await prefs.setString(AppKeys.name, name.text);

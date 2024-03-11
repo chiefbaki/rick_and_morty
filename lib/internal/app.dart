@@ -6,6 +6,7 @@ import 'package:rick_and_morty/core/config/settings/dio_settings.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/dark_theme.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/light_theme.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/theme_manager.dart';
+import 'package:rick_and_morty/core/utils/services/shared_prefs.dart';
 import 'package:rick_and_morty/features/auth/cubit/auth_cubit.dart';
 import 'package:rick_and_morty/features/auth/domain/auth_impl.dart';
 import 'package:rick_and_morty/features/auth/domain/auth_usecase.dart';
@@ -29,31 +30,31 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // @override
-  // void initState() {
-  //   themeManager.addListener(() {
-  //     themeMounted();
-  //   });
-  //   super.initState();
-  // }
-
-  // @override
-  // void dispose() {
-  //   themeManager.removeListener(() {
-  //     themeMounted();
-  //   });
-  //   super.dispose();
-  // }
-
-  // themeMounted() {
-  //   if (mounted) {
-  //     setState(() {});
-  //   }
-  // }
+  @override
+  void initState() {
+    themeManager.addListener(() {
+      themeMounted();
+    });
+    super.initState();
+  }
 
   @override
+  void dispose() {
+    themeManager.removeListener(() {
+      themeMounted();
+    });
+    super.dispose();
+  }
+
+  themeMounted() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
+
+  ThemeManager themeManager = ThemeManager();
+  @override
   Widget build(BuildContext context) {
-    ThemeManager themeManager = ThemeManager();
     print(themeManager.getThemeMode);
     return MultiRepositoryProvider(
       providers: [
@@ -111,10 +112,10 @@ class _MyAppState extends State<MyApp> {
             providers: [
               ChangeNotifierProvider(create: (_) => ThemeManager()),
               ChangeNotifierProvider(create: (_) => LocationProvider()),
-              ChangeNotifierProvider(create: (_) => ThemeSettings()),
+              ChangeNotifierProvider(create: (_) => SharedPrefs()),
             ],
             child: MaterialApp.router(
-              // debugShowCheckedModeBanner: false,
+              debugShowCheckedModeBanner: false,
               theme: lightTheme,
               themeMode: themeManager.getThemeMode,
               darkTheme: darkTheme,

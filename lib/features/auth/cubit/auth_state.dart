@@ -8,8 +8,9 @@ final class AuthInitial extends AuthState {}
 final class AuthLoading extends AuthState {}
 
 final class AuthSuccess extends AuthState {
-  final UserCredential signUp;
-  AuthSuccess({required this.signUp});
+  final UserCredential? signUp;
+  final UserCredential? signIn;
+  AuthSuccess({this.signUp, this.signIn});
 }
 
 final class AuthError extends AuthState {

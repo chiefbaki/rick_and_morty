@@ -14,7 +14,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   Future<void> routing() async {
     Future.delayed(const Duration(seconds: 3), () {
-      context.router.push(const DashboardRoute());
+      context.router.push(const SignInRoute());
     });
   }
 

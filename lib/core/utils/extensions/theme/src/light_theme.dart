@@ -16,23 +16,10 @@ final lightTheme = ThemeData(
     useMaterial3: false,
     brightness: Brightness.light,
     inputDecorationTheme: const InputDecorationTheme(),
+    elevatedButtonTheme: ElevatedButtonThemeData(),
     appBarTheme:
         const AppBarTheme(elevation: 0, backgroundColor: AppColors.white),
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: AppColors.lightGrey),
     scaffoldBackgroundColor: AppColors.white);
 
-
-// TextStyle? displayLarge,
-//     TextStyle? displayMedium,
-//     TextStyle? displaySmall,
-//     this.headlineLarge,
-//     TextStyle? headlineMedium,
-//     TextStyle? headlineSmall,
-//     TextStyle? titleLarge,
-//     TextStyle? titleMedium,
-//     TextStyle? titleSmall,
-//     TextStyle? bodyLarge,
-//     TextStyle? bodyMedium,
-//     TextStyle? bodySmall,
-//     TextStyle? labelLarge,
