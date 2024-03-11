@@ -104,19 +104,24 @@ class SignInPage extends StatelessWidget {
                                       width: 259,
                                       height: 40,
                                       decoration: BoxDecoration(
-                                        border: Border.all(color: AppColors.blue),
+                                        border:
+                                            Border.all(color: AppColors.blue),
                                         borderRadius: BorderRadius.circular(12),
                                       ),
                                       child: ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
                                           style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.transparent,
-                                            elevation: 0,
-                                          ),
+                                              
+                                              backgroundColor: Colors.transparent,
+                                              elevation: 0,
+                                              enabledMouseCursor:
+                                                  MouseCursor.defer),
                                           child: Text(
                                             "Ok",
-                                            style: AppFonts.s16w400
-                                                .copyWith(color: AppColors.blue),
+                                            style: AppFonts.s16w400.copyWith(
+                                                color: AppColors.blue),
                                           )),
                                     ),
                                   ),

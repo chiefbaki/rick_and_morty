@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i14;
+import 'package:flutter/cupertino.dart' as _i16;
 import 'package:flutter/material.dart' as _i15;
 import 'package:rick_and_morty/core/config/router/dashboard.dart' as _i2;
 import 'package:rick_and_morty/core/config/router/splash_page.dart' as _i13;
@@ -16,20 +17,22 @@ import 'package:rick_and_morty/features/auth/presentation/pages/sign_in_page.dar
     as _i11;
 import 'package:rick_and_morty/features/auth/presentation/pages/sign_up_page.dart'
     as _i12;
-import 'package:rick_and_morty/features/episode/presentation/episode_page.dart'
+import 'package:rick_and_morty/features/episode/presentation/pages/episode_info_page.dart'
     as _i4;
-import 'package:rick_and_morty/features/location/presentation/pages/location_info_page.dart'
+import 'package:rick_and_morty/features/episode/presentation/pages/episode_page.dart'
     as _i5;
-import 'package:rick_and_morty/features/location/presentation/pages/location_page.dart'
+import 'package:rick_and_morty/features/location/presentation/pages/location_info_page.dart'
     as _i6;
+import 'package:rick_and_morty/features/location/presentation/pages/location_page.dart'
+    as _i7;
 import 'package:rick_and_morty/features/main/presentation/pages/character_info_page.dart'
     as _i1;
 import 'package:rick_and_morty/features/main/presentation/pages/main_page.dart'
-    as _i7;
+    as _i8;
 import 'package:rick_and_morty/features/settings/presentation/pages/edit_info_page.dart'
     as _i3;
 import 'package:rick_and_morty/features/settings/presentation/pages/personal_info_page.dart'
-    as _i8;
+    as _i9;
 import 'package:rick_and_morty/features/settings/presentation/pages/settings_page.dart'
     as _i10;
 
@@ -65,10 +68,23 @@ abstract class $AppRouter extends _i14.RootStackRouter {
         child: const _i3.EditInfoPage(),
       );
     },
+    EpisodeInfoRoute.name: (routeData) {
+      final args = routeData.argsAs<EpisodeInfoRouteArgs>(
+          orElse: () => const EpisodeInfoRouteArgs());
+      return _i14.AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: _i4.EpisodeInfoPage(
+          key: args.key,
+          name: args.name,
+          series: args.series,
+          date: args.date,
+        ),
+      );
+    },
     EpisodeRoute.name: (routeData) {
       return _i14.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i4.EpisodePage(),
+        child: const _i5.EpisodePage(),
       );
     },
     LocationInfoRoute.name: (routeData) {
@@ -76,7 +92,7 @@ abstract class $AppRouter extends _i14.RootStackRouter {
           orElse: () => const LocationInfoRouteArgs());
       return _i14.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: _i5.LocationInfoPage(
+        child: _i6.LocationInfoPage(
           key: args.key,
           name: args.name,
           dimension: args.dimension,
@@ -87,19 +103,19 @@ abstract class $AppRouter extends _i14.RootStackRouter {
     LocationRoute.name: (routeData) {
       return _i14.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i6.LocationPage(),
+        child: const _i7.LocationPage(),
       );
     },
     MainRoute.name: (routeData) {
       return _i14.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i7.MainPage(),
+        child: const _i8.MainPage(),
       );
     },
     PersonalInfoRoute.name: (routeData) {
       return _i14.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i8.PersonalInfoPage(),
+        child: const _i9.PersonalInfoPage(),
       );
     },
     SettingsRoute.name: (routeData) {
@@ -216,7 +232,55 @@ class EditInfoRoute extends _i14.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i4.EpisodePage]
+/// [_i4.EpisodeInfoPage]
+class EpisodeInfoRoute extends _i14.PageRouteInfo<EpisodeInfoRouteArgs> {
+  EpisodeInfoRoute({
+    _i16.Key? key,
+    String? name,
+    String? series,
+    String? date,
+    List<_i14.PageRouteInfo>? children,
+  }) : super(
+          EpisodeInfoRoute.name,
+          args: EpisodeInfoRouteArgs(
+            key: key,
+            name: name,
+            series: series,
+            date: date,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'EpisodeInfoRoute';
+
+  static const _i14.PageInfo<EpisodeInfoRouteArgs> page =
+      _i14.PageInfo<EpisodeInfoRouteArgs>(name);
+}
+
+class EpisodeInfoRouteArgs {
+  const EpisodeInfoRouteArgs({
+    this.key,
+    this.name,
+    this.series,
+    this.date,
+  });
+
+  final _i16.Key? key;
+
+  final String? name;
+
+  final String? series;
+
+  final String? date;
+
+  @override
+  String toString() {
+    return 'EpisodeInfoRouteArgs{key: $key, name: $name, series: $series, date: $date}';
+  }
+}
+
+/// generated route for
+/// [_i5.EpisodePage]
 class EpisodeRoute extends _i14.PageRouteInfo<void> {
   const EpisodeRoute({List<_i14.PageRouteInfo>? children})
       : super(
@@ -230,7 +294,7 @@ class EpisodeRoute extends _i14.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i5.LocationInfoPage]
+/// [_i6.LocationInfoPage]
 class LocationInfoRoute extends _i14.PageRouteInfo<LocationInfoRouteArgs> {
   LocationInfoRoute({
     _i15.Key? key,
@@ -278,7 +342,7 @@ class LocationInfoRouteArgs {
 }
 
 /// generated route for
-/// [_i6.LocationPage]
+/// [_i7.LocationPage]
 class LocationRoute extends _i14.PageRouteInfo<void> {
   const LocationRoute({List<_i14.PageRouteInfo>? children})
       : super(
@@ -292,7 +356,7 @@ class LocationRoute extends _i14.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i7.MainPage]
+/// [_i8.MainPage]
 class MainRoute extends _i14.PageRouteInfo<void> {
   const MainRoute({List<_i14.PageRouteInfo>? children})
       : super(
@@ -306,7 +370,7 @@ class MainRoute extends _i14.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i8.PersonalInfoPage]
+/// [_i9.PersonalInfoPage]
 class PersonalInfoRoute extends _i14.PageRouteInfo<void> {
   const PersonalInfoRoute({List<_i14.PageRouteInfo>? children})
       : super(
@@ -318,7 +382,6 @@ class PersonalInfoRoute extends _i14.PageRouteInfo<void> {
 
   static const _i14.PageInfo<void> page = _i14.PageInfo<void>(name);
 }
-
 
 /// generated route for
 /// [_i10.SettingsPage]

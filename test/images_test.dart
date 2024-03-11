@@ -11,6 +11,7 @@ void main() {
     expect(File(Images.earth).existsSync(), isTrue);
     expect(File(Images.earth1).existsSync(), isTrue);
     expect(File(Images.episode).existsSync(), isTrue);
+    expect(File(Images.episodebg).existsSync(), isTrue);
     expect(File(Images.grid).existsSync(), isTrue);
     expect(File(Images.group).existsSync(), isTrue);
     expect(File(Images.img).existsSync(), isTrue);
@@ -21,6 +22,7 @@ void main() {
     expect(File(Images.notFound).existsSync(), isTrue);
     expect(File(Images.palette).existsSync(), isTrue);
     expect(File(Images.pass).existsSync(), isTrue);
+    expect(File(Images.play).existsSync(), isTrue);
     expect(File(Images.potato).existsSync(), isTrue);
     expect(File(Images.rick).existsSync(), isTrue);
     expect(File(Images.rickava).existsSync(), isTrue);

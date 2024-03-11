@@ -9,6 +9,7 @@ class Images {
   static const String earth = 'assets/images/earth.png';
   static const String earth1 = 'assets/images/earth1.png';
   static const String episode = 'assets/images/episode.svg';
+  static const String episodebg = 'assets/images/episodebg.png';
   static const String grid = 'assets/images/grid.png';
   static const String group = 'assets/images/group.png';
   static const String img = 'assets/images/img.png';
@@ -19,6 +20,7 @@ class Images {
   static const String notFound = 'assets/images/notFound.png';
   static const String palette = 'assets/images/palette.png';
   static const String pass = 'assets/images/pass.png';
+  static const String play = 'assets/images/play.png';
   static const String potato = 'assets/images/potato.png';
   static const String rick = 'assets/images/rick.png';
   static const String rickava = 'assets/images/rickava.png';
