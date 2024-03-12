@@ -9,14 +9,34 @@ class SharedPrefs extends ChangeNotifier {
   late String email = "name";
   late String password = "name";
 
-  SharedPrefs(){
+  String? gender;
+  String? status;
+
+  void setStatus(String? st){
+    status = st;
+    notifyListeners();
+  }
+
+  void setGender(String? g) {
+    gender = g;
+    notifyListeners();
+  }
+
+  void clearChoice() {
+    status = "";
+    gender = "";
+    notifyListeners();
+  }
+
+  String get getStatus => status ?? "";
+
+  SharedPrefs() {
     getData();
   }
 
   Future<void> initPrefs({required String key, required String value}) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString(key, value);
-    
   }
 
   Future<void> getData() async {

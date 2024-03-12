@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
+import 'package:rick_and_morty/core/utils/services/shared_prefs.dart';
 import 'package:rick_and_morty/features/main/presentation/cubits/character_cubit.dart';
 import 'package:rick_and_morty/features/main/presentation/cubits/character_state.dart';
 import 'package:rick_and_morty/features/widgets/custom_circle_progress.dart';
@@ -14,7 +16,9 @@ import 'package:rick_and_morty/features/widgets/not_found_widget.dart';
 
 @RoutePage()
 class MainPage extends StatefulWidget {
-  const MainPage({super.key});
+  final String? status;
+  final String? gender;
+  const MainPage({super.key, this.gender, this.status});
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -30,9 +34,13 @@ class _MainPageState extends State<MainPage> {
 
   bool isSelected = false;
   bool isVisible = false;
+
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<CharacterCubit>(context).getDataCharacter('');
+    final vm = Provider.of<SharedPrefs>(context);
+    
+    BlocProvider.of<CharacterCubit>(context)
+        .getDataCharacter("", vm.status, vm.gender);
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -44,7 +52,9 @@ class _MainPageState extends State<MainPage> {
                     controller: controller,
                     hintText: "Найти персонажа",
                     onTextChanged: (value) {
-                      context.read<CharacterCubit>().getDataCharacter(value);
+                      context
+                          .read<CharacterCubit>()
+                          .getDataCharacter(value, '', '');
                       print(value);
                     },
                   ),
@@ -53,6 +63,7 @@ class _MainPageState extends State<MainPage> {
                     if (state is CharacterLoading) {
                       return const CustomCircleProgress();
                     } else if (state is CharacterSuccess) {
+
                       final results = state.model?.results ?? [];
                       return Column(
                         children: [
@@ -116,7 +127,6 @@ class _MainPageState extends State<MainPage> {
                                     gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
-                                            
                                             mainAxisSpacing: 24),
                                     itemBuilder: (context, index) {
                                       return ListItem(

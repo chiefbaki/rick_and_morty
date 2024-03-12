@@ -31,7 +31,7 @@ class LocationPage extends StatelessWidget {
                     hintText: "Найти локацию",
                     onTextChanged: (value) {
                       context.read<LocationCubit>().getLocationData(value);
-                      print(value);
+                      debugPrint(value);
                     },
                   ),
                   const SizedBox(
@@ -56,7 +56,7 @@ class LocationPage extends StatelessWidget {
                             height: 24,
                           ),
                           SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.67,
+                            height: MediaQuery.of(context).size.height * 0.69,
                             child: ListView.separated(
                                 itemBuilder: (context, index) {
                                   return LocationCards(

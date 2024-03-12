@@ -6,6 +6,7 @@ import 'package:rick_and_morty/core/utils/resources/resources.dart';
 void main() {
   test('images assets test', () {
     expect(File(Images.character).existsSync(), isTrue);
+    expect(File(Images.clear).existsSync(), isTrue);
     expect(File(Images.cucumber).existsSync(), isTrue);
     expect(File(Images.divider).existsSync(), isTrue);
     expect(File(Images.earth).existsSync(), isTrue);
@@ -29,6 +30,8 @@ void main() {
     expect(File(Images.rickbg).existsSync(), isTrue);
     expect(File(Images.settings).existsSync(), isTrue);
     expect(File(Images.settingsIcon).existsSync(), isTrue);
+    expect(File(Images.sort1).existsSync(), isTrue);
+    expect(File(Images.sort2).existsSync(), isTrue);
     expect(File(Images.splash).existsSync(), isTrue);
     expect(File(Images.splashText).existsSync(), isTrue);
     expect(File(Images.user).existsSync(), isTrue);

@@ -7,22 +7,24 @@ class AppRouter extends $AppRouter {
   List<AutoRoute> get routes => [
         AutoRoute(
           page: SplashRoute.page,
+          
         ),
-        AutoRoute(page: DashboardRoute.page, initial: true, children: [
-          AutoRoute(page: MainRoute.page, initial: true),
+        AutoRoute(page: DashboardRoute.page,initial: true,  children: [
+          AutoRoute(page: MainRoute.page, initial: true,),
           AutoRoute(
             page: LocationRoute.page,
           ),
           AutoRoute(
             page: EpisodeRoute.page,
           ),
-          AutoRoute(page: SettingsRoute.page),
+          AutoRoute(page: SettingsRoute.page, ),
         ]),
         AutoRoute(
           page: LocationInfoRoute.page,
         ),
         AutoRoute(
           page: PersonalInfoRoute.page,
+          
         ),
 
         AutoRoute(
@@ -30,6 +32,7 @@ class AppRouter extends $AppRouter {
         ),
         AutoRoute(
           page: EditInfoRoute.page,
+          
         ),
         AutoRoute(
           page: CharacterInfoRoute.page,
@@ -38,10 +41,13 @@ class AppRouter extends $AppRouter {
 
         AutoRoute(
           page: SignInRoute.page,
-          // initial: true,
         ),
         AutoRoute(
           page: SignUpRoute.page,
+        ),
+         AutoRoute(
+          page: FilterRoute.page,
+          
         ),
       ];
 }

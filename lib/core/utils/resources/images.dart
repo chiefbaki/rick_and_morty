@@ -4,6 +4,7 @@ class Images {
   Images._();
 
   static const String character = 'assets/images/character.svg';
+  static const String clear = 'assets/images/clear.png';
   static const String cucumber = 'assets/images/cucumber.png';
   static const String divider = 'assets/images/divider.png';
   static const String earth = 'assets/images/earth.png';
@@ -27,6 +28,8 @@ class Images {
   static const String rickbg = 'assets/images/rickbg.png';
   static const String settings = 'assets/images/settings.svg';
   static const String settingsIcon = 'assets/images/settings_icon.png';
+  static const String sort1 = 'assets/images/sort1.png';
+  static const String sort2 = 'assets/images/sort2.png';
   static const String splash = 'assets/images/splash.png';
   static const String splashText = 'assets/images/splash_text.png';
   static const String user = 'assets/images/user.png';

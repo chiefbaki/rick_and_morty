@@ -7,11 +7,10 @@ class CharacterUseCase {
 
   CharacterUseCase({required this.dio});
 
-  Future<CharacterModel> getCharacter(String? query) async {
-    final Response response = await dio.get(ApiConsts.characters, queryParameters: {
-      "name": query
-    });
+  Future<CharacterModel> getCharacter(
+      String? query, String? status, String? gender) async {
+    final Response response = await dio.get(ApiConsts.characters,
+        queryParameters: {"name": query, "status": status, "gender": gender});
     return CharacterModel.fromJson(response.data);
   }
-
 }

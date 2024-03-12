@@ -96,7 +96,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     height: 36,
                   ),
                   const Divider(
-                    color: AppColors.green,
+                    color: AppColors.grey,
                   ),
                   const SizedBox(
                     height: 36,

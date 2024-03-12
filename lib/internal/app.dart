@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 import 'package:rick_and_morty/core/config/router/app_router.dart';
 import 'package:rick_and_morty/core/config/settings/dio_settings.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/dark_theme.dart';
@@ -20,42 +21,12 @@ import 'package:rick_and_morty/features/location/presentation/provider/location_
 import 'package:rick_and_morty/features/main/domain/character_impl.dart';
 import 'package:rick_and_morty/features/main/domain/character_usecase.dart';
 import 'package:rick_and_morty/features/main/presentation/cubits/character_cubit.dart';
-import 'package:rick_and_morty/features/settings/presentation/provider/theme_settings_provider.dart';
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
-  void initState() {
-    themeManager.addListener(() {
-      themeMounted();
-    });
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    themeManager.removeListener(() {
-      themeMounted();
-    });
-    super.dispose();
-  }
-
-  themeMounted() {
-    if (mounted) {
-      setState(() {});
-    }
-  }
-
-  ThemeManager themeManager = ThemeManager();
-  @override
   Widget build(BuildContext context) {
-    print(themeManager.getThemeMode);
     return MultiRepositoryProvider(
       providers: [
         RepositoryProvider(
@@ -109,19 +80,41 @@ class _MyAppState extends State<MyApp> {
           ),
         ],
         child: MultiProvider(
-            providers: [
-              ChangeNotifierProvider(create: (_) => ThemeManager()),
-              ChangeNotifierProvider(create: (_) => LocationProvider()),
-              ChangeNotifierProvider(create: (_) => SharedPrefs()),
-            ],
-            child: MaterialApp.router(
+          providers: <SingleChildWidget>[
+            ChangeNotifierProvider(create: (_) => ThemeManager()),
+            ChangeNotifierProvider(create: (_) => LocationProvider()),
+            ChangeNotifierProvider(create: (_) => SharedPrefs()),
+          ],
+          child: Builder(builder: (context) {
+            return MaterialApp.router(
               debugShowCheckedModeBanner: false,
-              theme: lightTheme,
-              themeMode: themeManager.getThemeMode,
-              darkTheme: darkTheme,
+              theme: context.watch<ThemeManager>().getCurretnTheme,
               routerConfig: AppRouter().config(),
-            )),
+            );
+          }),
+        ),
       ),
     );
   }
 }
+
+// class MyApp extends StatefulWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   State<MyApp> createState() => _MyAppState();
+// }
+
+// class _MyAppState extends State<MyApp> {
+//   ThemeManager themeManager = ThemeManager();
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp.router(
+//       debugShowCheckedModeBanner: false,
+//       theme: lightTheme,
+//       themeMode: themeManager.getThemeMode,
+//       darkTheme: darkTheme,
+//       routerConfig: AppRouter().config(),
+//     );
+//   }
+// }

@@ -8,7 +8,6 @@ import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/theme_manager.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
 import 'package:rick_and_morty/core/utils/services/shared_prefs.dart';
-import 'package:rick_and_morty/features/settings/presentation/provider/theme_settings_provider.dart';
 import 'package:rick_and_morty/features/widgets/arrow_back_btn.dart';
 import 'package:rick_and_morty/features/widgets/edit_btn.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -165,12 +164,12 @@ class _SettingsPageState extends State<SettingsPage> {
                                 children: [
                                   ElevatedButton(
                                       onPressed: () {
-                                        themeManager.toggleTheme();
+                                        themeManager.changeTheme();
                                       },
                                       child: Text("Выключено")),
                                   ElevatedButton(
                                       onPressed: () {
-                                        themeManager.toggleTheme();
+                                        themeManager.changeTheme();
                                       },
                                       child: Text("Включено")),
                                   // RadioListTile(

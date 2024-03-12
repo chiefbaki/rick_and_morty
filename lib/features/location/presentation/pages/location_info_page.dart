@@ -20,7 +20,7 @@ class LocationInfoPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final vm = Provider.of<LocationProvider>(context);
-    BlocProvider.of<CharacterCubit>(context).getDataCharacter('');
+    BlocProvider.of<CharacterCubit>(context).getDataCharacter('', '', '');
     return Scaffold(
       body: Stack(
         children: [

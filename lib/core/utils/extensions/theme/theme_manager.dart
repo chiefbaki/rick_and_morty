@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/dark_theme.dart';
+import 'package:rick_and_morty/core/utils/extensions/theme/src/light_theme.dart';
 
 class ThemeManager extends ChangeNotifier {
-  ThemeMode _themeMode = ThemeMode.dark;
-  get getThemeMode => _themeMode;
-  void toggleTheme() {
-    _themeMode =
-        _themeMode == ThemeMode.dark ? ThemeMode.light : ThemeMode.dark;
+  bool isDarkTheme = true;
 
-    print(_themeMode.runtimeType);
+  ThemeData get getCurretnTheme => isDarkTheme ? darkTheme : lightTheme;
+
+  void changeTheme() {
+    isDarkTheme = !isDarkTheme;
+    print(getCurretnTheme);
     notifyListeners();
   }
 }
