@@ -22,7 +22,6 @@ class _FilterPageState extends State<FilterPage> {
     {"name": "Dead", "isChecked": false},
     {"name": "Unknown", "isChecked": false},
   ];
-
   final List<Map<String, dynamic>> genderValues = [
     {"name": "Female", "isChecked": false},
     {"name": "Male", "isChecked": false},

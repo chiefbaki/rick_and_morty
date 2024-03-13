@@ -13,13 +13,17 @@ class GridItem extends StatelessWidget {
   final String species;
   final String gender;
   final String img;
+  final String origin;
+  final String location;
   const GridItem(
       {super.key,
       required this.status,
       required this.name,
       required this.img,
       required this.species,
-      required this.gender});
+      required this.gender,
+      required this.origin,
+      required this.location});
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +71,8 @@ class GridItem extends StatelessWidget {
                       species: species,
                       status: status,
                       img: img,
+                      origin: origin,
+                      location: location,
                     )));
       }),
     );

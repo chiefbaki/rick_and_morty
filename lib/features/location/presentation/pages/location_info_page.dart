@@ -85,12 +85,17 @@ class LocationInfoPage extends StatelessWidget {
                           child: CircularProgressIndicator(),
                         );
                       } else if (state is CharacterSuccess) {
-                        return SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.35,
+                        return Expanded(
                             child: ListView.separated(
                                 physics: const AlwaysScrollableScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return GridItem(
+                                      location: state.model?.results?[index]
+                                              .location?.name ??
+                                          "",
+                                      origin: state.model?.results?[index]
+                                              .origin?.name ??
+                                          "",
                                       status:
                                           state.model?.results?[index].status ??
                                               "",
@@ -98,9 +103,9 @@ class LocationInfoPage extends StatelessWidget {
                                           "",
                                       img: state.model?.results?[index].image ??
                                           "",
-                                      species:
-                                          state.model?.results?[index].species ??
-                                              "",
+                                      species: state
+                                              .model?.results?[index].species ??
+                                          "",
                                       gender:
                                           state.model?.results?[index].gender ??
                                               "");

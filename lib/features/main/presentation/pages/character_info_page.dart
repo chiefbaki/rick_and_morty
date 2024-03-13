@@ -1,30 +1,41 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_fonts.dart';
 import 'package:rick_and_morty/core/utils/resources/resources.dart';
+import 'package:rick_and_morty/features/episode/presentation/cubit/episode_cubit.dart';
 import 'package:rick_and_morty/features/location/presentation/provider/location_provider.dart';
+import 'package:rick_and_morty/features/main/presentation/cubits/character_state.dart';
 import 'package:rick_and_morty/features/widgets/back_btn.dart';
 import 'package:rick_and_morty/features/widgets/character_info_tile.dart';
+import 'package:rick_and_morty/features/widgets/episode.dart';
+
 
 @RoutePage()
 class CharacterInfoPage extends StatelessWidget {
   const CharacterInfoPage(
-      {super.key, this.name, this.gender, this.species, this.status, this.img});
+      {super.key,
+      this.name,
+      this.gender,
+      this.species,
+      this.status,
+      this.img,
+      this.origin,
+      this.location});
   final String? name;
   final String? gender;
   final String? species;
   final String? status;
   final String? img;
+  final String? origin;
+  final String? location;
 
   @override
   Widget build(BuildContext context) {
-    final vm = Provider.of<LocationProvider>(context);
-    print(vm.gender);
-    print(vm.name);
-
+    BlocProvider.of<EpisodeCubit>(context).getEpisodes('');
     return Scaffold(
       body: Stack(
         children: [
@@ -40,20 +51,20 @@ class CharacterInfoPage extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 180, horizontal: 135),
             child: Container(
               width: 160,
-             decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              color: AppColors.darkTheme
-             ),
-             child: Padding(
-               padding: const EdgeInsets.all(8.0),
-               child: ClipOval(
-                child: Image.network(img ?? "",),
-               ),
-             ),
+              decoration: const BoxDecoration(
+                  shape: BoxShape.circle, color: AppColors.darkTheme),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ClipOval(
+                  child: Image.network(
+                    img ?? "",
+                  ),
+                ),
+              ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 260), //  Задать верные паддинги
+            padding: const EdgeInsets.only(top: 350), //  Задать верные паддинги
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -126,20 +137,21 @@ class CharacterInfoPage extends StatelessWidget {
                     ),
                     CharacterInfoListTile(
                       onPressed: () {
-                        context.router.push(LocationInfoRoute());
+                        context.router.push(
+                            LocationInfoRoute(name: origin, type: location));
                       },
                       title: "Место рождения",
-                      subtitle: "Земля C-137",
+                      subtitle: origin ?? "",
                     ),
                     CharacterInfoListTile(
                       onPressed: () {
                         context.router.push(LocationInfoRoute());
                       },
                       title: "Местоположение",
-                      subtitle: "Земля (Измерение подменны)",
+                      subtitle: location ?? "",
                     ),
                     const SizedBox(
-                      height: 36,
+                      height: 26,
                     ),
                     const Divider(
                       color: AppColors.textFieldColor,
@@ -162,12 +174,34 @@ class CharacterInfoPage extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    // GridItem(
-                    //   status: "Серия 1",
-                    //   name: "Пилот",
-                    //   img: Images.rick,
-                    //   species: "2 декабря 2013",
-                    // )
+                    BlocBuilder<EpisodeCubit, EpisodeState>(
+                        builder: (context, state) {
+                      if (state is EpisodeLoading) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      } else if (state is EpisodeSuccess) {
+                        final results = state.model.results;
+                        return Expanded(
+                            child: ListView.separated(
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return EpisodeEl(
+                                      series: results?[index].episode ?? "",
+                                      name: results?[index].name ?? "",
+                                      date: results?[index].airDate ?? "");
+                                },
+                                separatorBuilder: (context, index) {
+                                  return const SizedBox(
+                                    height: 24,
+                                  );
+                                },
+                                itemCount: 10));
+                      } else if (state is EpisodeError) {
+                        debugPrint(state.error.toUpperCase());
+                      }
+                      return const SizedBox();
+                    })
                   ],
                 ),
               ),

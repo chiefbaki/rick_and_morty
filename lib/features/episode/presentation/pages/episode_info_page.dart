@@ -61,8 +61,8 @@ class EpisodeInfoPage extends StatelessWidget {
                         Center(
                           child: Text(
                             name ?? "",
-                            style:
-                                AppFonts.s24w700.copyWith(color: AppColors.white),
+                            style: AppFonts.s24w700
+                                .copyWith(color: AppColors.white),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -130,12 +130,18 @@ class EpisodeInfoPage extends StatelessWidget {
                                         const AlwaysScrollableScrollPhysics(),
                                     itemBuilder: (context, index) {
                                       return GridItem(
+                                          location: state.model?.results?[index]
+                                                  .location?.name ??
+                                              "",
+                                          origin: state.model?.results?[index]
+                                                  .origin?.name ??
+                                              "",
                                           status: state.model?.results?[index]
                                                   .status ??
                                               "",
-                                          name: state.model?.results?[index]
-                                                  .name ??
-                                              "",
+                                          name:
+                                              state.model?.results?[index].name ??
+                                                  "",
                                           img: state.model?.results?[index]
                                                   .image ??
                                               "",

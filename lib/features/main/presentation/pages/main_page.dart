@@ -55,7 +55,7 @@ class _MainPageState extends State<MainPage> {
                       context
                           .read<CharacterCubit>()
                           .getDataCharacter(value, '', '');
-                      print(value);
+                      
                     },
                   ),
                   BlocBuilder<CharacterCubit, CharacterState>(
@@ -101,6 +101,8 @@ class _MainPageState extends State<MainPage> {
                               child: ListView.separated(
                                   itemBuilder: (context, index) {
                                     return GridItem(
+                                      location: results[index].location?.name ?? "",
+                                      origin: results[index].origin?.name ?? "",
                                         img: results[index].image ?? "",
                                         status: results[index].status ?? "",
                                         name: results[index].name ?? "",
