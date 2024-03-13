@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:rick_and_morty/core/config/router/app_router.gr.dart';
 import 'package:rick_and_morty/core/utils/constants/consts.dart';
 import 'package:rick_and_morty/core/utils/extensions/theme/src/app_colors.dart';
@@ -54,9 +55,9 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   
+
   @override
   Widget build(BuildContext context) {
-    // final prefs = Provider.of<SharedPrefs>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(

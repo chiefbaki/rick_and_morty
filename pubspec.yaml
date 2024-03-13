@@ -49,6 +49,7 @@ dependencies:
   shared_preferences: ^2.2.2
   firebase_core: ^2.24.2
   firebase_auth: ^4.16.0
+  permission_handler: ^11.3.0
   
 
 dev_dependencies:
