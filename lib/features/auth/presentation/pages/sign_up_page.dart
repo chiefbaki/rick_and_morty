@@ -70,6 +70,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: name,
                     hintText: "Имя",
                   ),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   Text(
                     "Фамилия",
                     style: AppFonts.s14w400.copyWith(color: AppColors.grey),
@@ -81,8 +84,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: lastName,
                     hintText: "Фамилия",
                   ),
+                  const SizedBox(
+                    height: 8,
+                  ),
                   Text(
-                    "Фамилия",
+                    "Отчество",
                     style: AppFonts.s14w400.copyWith(color: AppColors.grey),
                   ),
                   const SizedBox(
